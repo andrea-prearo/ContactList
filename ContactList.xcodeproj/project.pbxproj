@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		8BB36B4FCF8667091CF3202F /* Pods_ContactList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8731D871005D3872A6BE3DC6 /* Pods_ContactList.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		AF52E5AB1C8B84C300A7FDB9 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF52E5AA1C8B84C300A7FDB9 /* Contact.swift */; };
+		AF52E5AD1C8B881300A7FDB9 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF52E5AC1C8B881300A7FDB9 /* WebService.swift */; };
+		AFADE9DF1C8CD41D008B614F /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFADE9DE1C8CD41D008B614F /* Auth.swift */; };
+		AFADE9E31C8CE074008B614F /* SegueIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFADE9E21C8CE074008B614F /* SegueIdentifiers.swift */; };
+		AFADE9E61C8CEBB2008B614F /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFADE9E51C8CEBB2008B614F /* ContactsTableViewController.swift */; };
+		AFADE9EA1C8CF196008B614F /* UIViewController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFADE9E91C8CF196008B614F /* UIViewController+Util.swift */; };
 		AFEA5B071C8B53900066768B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEA5B061C8B53900066768B /* AppDelegate.swift */; };
 		AFEA5B091C8B53900066768B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEA5B081C8B53900066768B /* LoginViewController.swift */; };
 		AFEA5B0C1C8B53900066768B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFEA5B0A1C8B53900066768B /* Main.storyboard */; };
@@ -18,6 +24,12 @@
 /* Begin PBXFileReference section */
 		6B8E727D352F542CAC38E6E9 /* Pods-ContactList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContactList.release.xcconfig"; path = "Pods/Target Support Files/Pods-ContactList/Pods-ContactList.release.xcconfig"; sourceTree = "<group>"; };
 		8731D871005D3872A6BE3DC6 /* Pods_ContactList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ContactList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF52E5AA1C8B84C300A7FDB9 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		AF52E5AC1C8B881300A7FDB9 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		AFADE9DE1C8CD41D008B614F /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		AFADE9E21C8CE074008B614F /* SegueIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueIdentifiers.swift; sourceTree = "<group>"; };
+		AFADE9E51C8CEBB2008B614F /* ContactsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
+		AFADE9E91C8CF196008B614F /* UIViewController+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Util.swift"; sourceTree = "<group>"; };
 		AFEA5B031C8B53900066768B /* ContactList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFEA5B061C8B53900066768B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFEA5B081C8B53900066768B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +61,24 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		AF52E5A91C8B84B600A7FDB9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AFADE9DE1C8CD41D008B614F /* Auth.swift */,
+				AF52E5AA1C8B84C300A7FDB9 /* Contact.swift */,
+				AF52E5AC1C8B881300A7FDB9 /* WebService.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		AFADE9E41C8CEB98008B614F /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				AFADE9E51C8CEBB2008B614F /* ContactsTableViewController.swift */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
 		AFEA5AFA1C8B53900066768B = {
 			isa = PBXGroup;
 			children = (
@@ -70,7 +100,11 @@
 		AFEA5B051C8B53900066768B /* ContactList */ = {
 			isa = PBXGroup;
 			children = (
+				AFADE9E21C8CE074008B614F /* SegueIdentifiers.swift */,
+				AFADE9E91C8CF196008B614F /* UIViewController+Util.swift */,
+				AF52E5A91C8B84B600A7FDB9 /* Models */,
 				AFEA5B181C8B54090066768B /* Login */,
+				AFADE9E41C8CEB98008B614F /* Contacts */,
 				AFEA5B061C8B53900066768B /* AppDelegate.swift */,
 				AFEA5B0A1C8B53900066768B /* Main.storyboard */,
 				AFEA5B0D1C8B53900066768B /* Assets.xcassets */,
@@ -218,8 +252,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFADE9DF1C8CD41D008B614F /* Auth.swift in Sources */,
+				AF52E5AB1C8B84C300A7FDB9 /* Contact.swift in Sources */,
 				AFEA5B091C8B53900066768B /* LoginViewController.swift in Sources */,
+				AF52E5AD1C8B881300A7FDB9 /* WebService.swift in Sources */,
+				AFADE9E31C8CE074008B614F /* SegueIdentifiers.swift in Sources */,
+				AFADE9EA1C8CF196008B614F /* UIViewController+Util.swift in Sources */,
 				AFEA5B071C8B53900066768B /* AppDelegate.swift in Sources */,
+				AFADE9E61C8CEBB2008B614F /* ContactsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
