@@ -1,10 +1,15 @@
 PODS:
   - Alamofire (3.2.1)
+  - Locksmith (2.0.8)
 
 DEPENDENCIES:
   - Alamofire (~> 3.2.1)
+  - Locksmith (~> 2.0.8)
 
 SPEC CHECKSUMS:
   Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
+  Locksmith: a8ed41ac4c06506ea8cb199d8ec8a8d3d108eb2a
 
-COCOAPODS: 0.38.2
+PODFILE CHECKSUM: 32f4c254a7c7a6623d996c64ce6d22916b98adb1
+
+COCOAPODS: 1.0.0.beta.4
