@@ -12,13 +12,13 @@ let ContactCellId = "ContactCell"
 
 class ContactsTableViewController: UITableViewController {
 
-    var contacts: [Contact?]?
+    private var contacts: [Contact?]?
+    private var selectedContact: Contact?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = NSLocalizedString("Contacts", comment: "Contacts")
-        contacts = nil
 
         Contact.getAll { [weak self] (success, contacts, error) -> () in
             if !success {
@@ -50,7 +50,7 @@ class ContactsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(ContactCellId, forIndexPath: indexPath) as! ContactCell
         guard let contacts = contacts,
-            let contact = contacts[indexPath.row]
+            contact = contacts[indexPath.row]
         else {
             return cell
         }
@@ -59,4 +59,26 @@ class ContactsTableViewController: UITableViewController {
         return cell
     }
 
+    // MARK: UITableViewDelegate protocol methods
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        guard let contacts = contacts,
+            contact = contacts[indexPath.row]
+        else {
+            return
+        }
+        selectedContact = contact
+        self.performSegueWithIdentifier(SegueIdentifiers.ContactsToContactDetailSegue.rawValue, sender: self)
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == SegueIdentifiers.ContactsToContactDetailSegue.rawValue {
+            guard let destinationViewController = segue.destinationViewController as? ContactDetailViewController,
+                _ = selectedContact
+                else {
+                return
+            }
+            destinationViewController.contact = selectedContact
+        }
+    }
 }

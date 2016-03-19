@@ -1,24 +1,24 @@
 //
-//  ContactCellViewModel.swift
+//  ContactDetailViewControllerViewModel.swift
 //  ContactList
 //
-//  Created by Prearo, Andrea on 3/10/16.
+//  Created by Prearo, Andrea on 3/19/16.
 //  Copyright © 2016 Prearo, Andrea. All rights reserved.
 //
 
 import Foundation
 
-class ContactCellViewModel {
-
+class ContactDetailViewControllerViewModel {
+    
     let avatarUrl: String?
     let username: String
-    let address: String
-
+    let company: String
+    
     private let contact: Contact
-
+    
     init(contact: Contact) {
         self.contact = contact
-
+        
         // Avatar
         if let url = self.contact.avatar {
             avatarUrl = url
@@ -31,15 +31,9 @@ class ContactCellViewModel {
         let lastName = String.emptyForNilOptional(contact.lastName)
         username = "\(firstName) \(lastName)"
         
-        // Address
-        if let firstLocation = contact.location?.first,
-            location = firstLocation {
-            let city = String.emptyForNilOptional(location.city)
-            let state = String.emptyForNilOptional(location.state)
-            address = "\(city), \(state)"
-        } else {
-            address = ", "
-        }
+        // Company
+        company = String.emptyForNilOptional(contact.company)
+
     }
     
 }

@@ -19,11 +19,11 @@ class ContactCell: UITableViewCell {
     func configure(viewModel: ContactCellViewModel) {
         self.viewModel = viewModel
 
-        username.text = viewModel.username
-        address.text = viewModel.address
         if let url = viewModel.avatarUrl {
             avatar.downloadImageFromUrl(url)
         }
+        username.text = viewModel.username
+        address.text = viewModel.address
     }
 
 }

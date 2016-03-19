@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		86F8AA735571E2C6C3F6ADDF /* Pods_ContactList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E48D1C4D7FF23BC2DB479EC /* Pods_ContactList.framework */; };
+		AF04EFC61C9DEBAD0037351E /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF04EFC51C9DEBAD0037351E /* ContactDetailViewController.swift */; };
+		AF04EFC81C9DF4A40037351E /* ContactDetailViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF04EFC71C9DF4A40037351E /* ContactDetailViewControllerViewModel.swift */; };
+		AF04EFCA1C9DFF4D0037351E /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF04EFC91C9DFF4D0037351E /* Location.swift */; };
 		AF45F9A01C925E1F00919CE5 /* ContactCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF45F99F1C925E1F00919CE5 /* ContactCellViewModel.swift */; };
 		AF52E5AB1C8B84C300A7FDB9 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF52E5AA1C8B84C300A7FDB9 /* Contact.swift */; };
 		AF52E5AD1C8B881300A7FDB9 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF52E5AC1C8B881300A7FDB9 /* WebService.swift */; };
@@ -31,6 +34,9 @@
 /* Begin PBXFileReference section */
 		0E48D1C4D7FF23BC2DB479EC /* Pods_ContactList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ContactList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40B4A812FE36A674A3DB36F1 /* Pods-ContactList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContactList.release.xcconfig"; path = "Pods/Target Support Files/Pods-ContactList/Pods-ContactList.release.xcconfig"; sourceTree = "<group>"; };
+		AF04EFC51C9DEBAD0037351E /* ContactDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
+		AF04EFC71C9DF4A40037351E /* ContactDetailViewControllerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailViewControllerViewModel.swift; sourceTree = "<group>"; };
+		AF04EFC91C9DFF4D0037351E /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		AF45F99F1C925E1F00919CE5 /* ContactCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCellViewModel.swift; sourceTree = "<group>"; };
 		AF52E5AA1C8B84C300A7FDB9 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		AF52E5AC1C8B881300A7FDB9 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
@@ -87,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				AF45F99F1C925E1F00919CE5 /* ContactCellViewModel.swift */,
+				AF04EFC71C9DF4A40037351E /* ContactDetailViewControllerViewModel.swift */,
 			);
 			name = "View Models";
 			sourceTree = "<group>";
@@ -96,6 +103,7 @@
 			children = (
 				AFADE9DE1C8CD41D008B614F /* Auth.swift */,
 				AF52E5AA1C8B84C300A7FDB9 /* Contact.swift */,
+				AF04EFC91C9DFF4D0037351E /* Location.swift */,
 				AFADE9E21C8CE074008B614F /* SegueIdentifiers.swift */,
 				AF52E5AC1C8B881300A7FDB9 /* WebService.swift */,
 			);
@@ -171,6 +179,7 @@
 			children = (
 				AFEA5B081C8B53900066768B /* LoginViewController.swift */,
 				AFADE9E51C8CEBB2008B614F /* ContactsTableViewController.swift */,
+				AF04EFC51C9DEBAD0037351E /* ContactDetailViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -297,11 +306,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF04EFCA1C9DFF4D0037351E /* Location.swift in Sources */,
 				AFADE9DF1C8CD41D008B614F /* Auth.swift in Sources */,
 				AF52E5AB1C8B84C300A7FDB9 /* Contact.swift in Sources */,
 				AFEA5B091C8B53900066768B /* LoginViewController.swift in Sources */,
 				AF52E5AD1C8B881300A7FDB9 /* WebService.swift in Sources */,
 				AFADE9E31C8CE074008B614F /* SegueIdentifiers.swift in Sources */,
+				AF04EFC61C9DEBAD0037351E /* ContactDetailViewController.swift in Sources */,
 				AFADE9EA1C8CF196008B614F /* UIViewController+Util.swift in Sources */,
 				AF95ADE31C912B36003817AE /* UIImageView+Util.swift in Sources */,
 				AF95ADE11C9125E4003817AE /* ContactCell.swift in Sources */,
@@ -312,6 +323,7 @@
 				AF45F9A01C925E1F00919CE5 /* ContactCellViewModel.swift in Sources */,
 				AF5E45E11C907ABC001BE93C /* AuthorizedUser.swift in Sources */,
 				AFADE9E61C8CEBB2008B614F /* ContactsTableViewController.swift in Sources */,
+				AF04EFC81C9DF4A40037351E /* ContactDetailViewControllerViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

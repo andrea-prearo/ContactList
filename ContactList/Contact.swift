@@ -18,11 +18,7 @@ class Contact {
     let company: String?
     let phone: [String]?
     let email: [String]?
-    let address: String?
-    let city: String?
-    let state: String?
-    let country: String?
-    let zipCode: String?
+    let location: [Location?]?
 
     init?(avatar: String?,
         firstName: String?,
@@ -30,22 +26,14 @@ class Contact {
         company: String?,
         phone: [String]?,
         email: [String]?,
-        address: String?,
-        city: String?,
-        state: String?,
-        country: String?,
-        let zipCode: String?) {
+        location: [Location?]?) {
         self.avatar = avatar
         self.firstName = firstName
         self.lastName = lastName
         self.company = company
         self.phone = phone
         self.email = email
-        self.address = address
-        self.city = city
-        self.state = state
-        self.country = country
-        self.zipCode = zipCode
+        self.location = location
     }
     
     class func getAll(completionBlock: (success: Bool, contacts: [Contact?]?, error: NSError?) -> ()) {
@@ -103,22 +91,17 @@ extension Contact {
         let company = json["company"] as? String
         let phone = json["phone"] as? [String]
         let email = json["email"] as? [String]
-        let address = json["address"] as? String
-        let city = json["city"] as? String
-        let state = json["state"] as? String
-        let country = json["country"] as? String
-        let zipCode = json["zipCode"] as? String
+        let locationArray = json["location"] as? [[String: AnyObject]]
+        let location = locationArray.map {
+            Location.decode($0)
+        }
         return Contact(avatar: avatar,
             firstName: firstName,
             lastName: lastName,
             company: company,
             phone: phone,
             email: email,
-            address: address,
-            city: city,
-            state: state,
-            country: country,
-            zipCode: zipCode)
+            location: location)
     }
     
 }
