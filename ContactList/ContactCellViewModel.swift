@@ -33,9 +33,10 @@ class ContactCellViewModel {
         
         // Address
         if let firstLocation = contact.location?.first,
-            location = firstLocation {
-            let city = String.emptyForNilOptional(location.city)
-            let state = String.emptyForNilOptional(location.state)
+            location = firstLocation,
+            data = location.data {
+            let city = String.emptyForNilOptional(data.city)
+            let state = String.emptyForNilOptional(data.state)
             address = "\(city), \(state)"
         } else {
             address = ", "

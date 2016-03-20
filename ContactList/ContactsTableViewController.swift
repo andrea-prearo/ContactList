@@ -80,7 +80,7 @@ class ContactsTableViewController: UITableViewController {
             }
             destinationViewController.contact = selectedContact
             let backItem = UIBarButtonItem()
-            backItem.title = ""
+            backItem.title = NSLocalizedString("Back", comment: "Back")
             navigationItem.backBarButtonItem = backItem
         }
     }

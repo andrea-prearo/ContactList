@@ -255,11 +255,18 @@
                                     <constraint firstItem="beh-7e-Rzr" firstAttribute="centerX" secondItem="pjK-GT-8Nj" secondAttribute="centerX" id="YRn-Pa-M3t"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3vw-gl-Tz9">
+                                <rect key="frame" x="0.0" y="259" width="600" height="219"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="pjK-GT-8Nj" secondAttribute="trailing" constant="-20" id="Jc8-Oa-uRc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3vw-gl-Tz9" secondAttribute="trailing" constant="-20" id="Kqh-W3-oJi"/>
                             <constraint firstItem="pjK-GT-8Nj" firstAttribute="leading" secondItem="W8t-HJ-zV4" secondAttribute="leadingMargin" constant="-20" id="ReC-HW-w0N"/>
+                            <constraint firstItem="3vw-gl-Tz9" firstAttribute="top" secondItem="pjK-GT-8Nj" secondAttribute="bottom" constant="-1" id="TVO-y8-pkD"/>
+                            <constraint firstItem="3vw-gl-Tz9" firstAttribute="leading" secondItem="W8t-HJ-zV4" secondAttribute="leadingMargin" constant="-20" id="jay-rh-NDK"/>
                             <constraint firstItem="pjK-GT-8Nj" firstAttribute="top" secondItem="sYz-h2-Qdg" secondAttribute="bottom" id="pS6-FK-FbW"/>
                         </constraints>
                     </view>

@@ -16,16 +16,16 @@ class Contact {
     let firstName: String?
     let lastName: String?
     let company: String?
-    let phone: [String]?
-    let email: [String]?
+    let phone: [Phone?]?
+    let email: [Email?]?
     let location: [Location?]?
 
     init?(avatar: String?,
         firstName: String?,
         lastName: String?,
         company: String?,
-        phone: [String]?,
-        email: [String]?,
+        phone: [Phone?]?,
+        email: [Email?]?,
         location: [Location?]?) {
         self.avatar = avatar
         self.firstName = firstName
@@ -89,12 +89,9 @@ extension Contact {
         let firstName = json["firstName"] as? String
         let lastName = json["lastName"] as? String
         let company = json["company"] as? String
-        let phone = json["phone"] as? [String]
-        let email = json["email"] as? [String]
-        let locationArray = json["location"] as? [[String: AnyObject]]
-        let location = locationArray.map {
-            Location.decode($0)
-        }
+        let phone = Phone.decode(json["phone"] as? [[String: AnyObject]])
+        let email = Email.decode(json["email"]as? [[String: AnyObject]])
+        let location = Location.decode(json["location"] as? [[String: AnyObject]])
         return Contact(avatar: avatar,
             firstName: firstName,
             lastName: lastName,
@@ -102,6 +99,12 @@ extension Contact {
             phone: phone,
             email: email,
             location: location)
+    }
+    
+    static func decode(json: [[String: AnyObject]]) -> [Contact?] {
+        return json.map({
+            return Contact.decode($0)
+        })
     }
     
 }
