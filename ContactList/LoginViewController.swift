@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
                     if let error = error {
                         self?.showError(title, message: error.localizedDescription)
                     } else {
-                        self?.showError(title, message: "Connection failed.")
+                        self?.showError(title, message:  NSLocalizedString("Connection failed.", comment: "Connection failed."))
                     }
                 }
             }
@@ -50,7 +50,7 @@ class LoginViewController: UIViewController {
                     if let token = token where success {
                         guard let account = AuthorizedUser.init(email: username, password: password, token: token) else {
                             dispatch_async(dispatch_get_main_queue()) {
-                                self?.showError(title, message: "Invalid authorization.")
+                                self?.showError(title, message: NSLocalizedString("Invalid authorization.", comment: "Invalid authorization."))
                             }
                             return
                         }
@@ -64,16 +64,17 @@ class LoginViewController: UIViewController {
                             if let error = error {
                                 self?.showError(title, message: error.localizedDescription)
                             } else {
-                                self?.showError(title, message: "Authentication failed.")
+                                self?.showError(title, message: NSLocalizedString("Authentication failed.", comment: "Authentication failed."))
                             }
                         }
                     }
                 }
         } else {
-            let alertController = UIAlertController(title: "Input Error",
-                message: "Please, enter email and password",
+            let alertController = UIAlertController(
+                title: NSLocalizedString("Input Error", comment: "Input Error"),
+                message: NSLocalizedString("Please, enter email and password", comment: "Please, enter email and password"),
                 preferredStyle: .Alert)
-            let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            let OKAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .Default, handler: nil)
             alertController.addAction(OKAction)
             self.presentViewController(alertController, animated: true, completion: nil)
         }

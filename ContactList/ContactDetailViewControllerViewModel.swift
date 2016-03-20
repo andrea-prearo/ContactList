@@ -33,7 +33,6 @@ class ContactDetailViewControllerViewModel {
         
         // Company
         company = String.emptyForNilOptional(contact.company)
-
     }
     
 }

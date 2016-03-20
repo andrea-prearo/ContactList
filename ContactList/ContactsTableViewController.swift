@@ -27,7 +27,7 @@ class ContactsTableViewController: UITableViewController {
                     if let error = error {
                         self?.showError(title, message: error.localizedDescription)
                     } else {
-                        self?.showError(title, message: "Can't retrieve contacts.")
+                        self?.showError(title, message: NSLocalizedString("Can't retrieve contacts.", comment: "Can't retrieve contacts."))
                     }
                 }
             } else {
@@ -79,6 +79,9 @@ class ContactsTableViewController: UITableViewController {
                 return
             }
             destinationViewController.contact = selectedContact
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
         }
     }
 }
