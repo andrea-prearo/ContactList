@@ -41,7 +41,7 @@ class ContactDetailViewController: UIViewController {
         let screenSize = UIScreen.mainScreen().bounds
         scrollView.contentSize = CGSizeMake(screenSize.width, screenSize.height + 1)
     }
-    
+
     func setUpStyle() {
         view.backgroundColor = UIColor.defaultGradientBackgroundColor()
 
