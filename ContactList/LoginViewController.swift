@@ -21,10 +21,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Debug
-        usernameTextField.text = "user001@hidden-garden-53580.com"
-        passwordTextField.text = "user001-1234"
-        
+        setUpStyle()
+
         WebService.ping { [weak self] (success, error) -> () in
             if !success {
                 dispatch_async(dispatch_get_main_queue()) {
@@ -38,7 +36,22 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    
+
+    func setUpStyle() {
+        view.backgroundColor = UIColor.defaultGradientBackgroundColor()
+
+        submitButton.layer.cornerRadius = CGFloat(2.5)
+        submitButton.clipsToBounds = true
+        submitButton.setBackgroundImage(UIImage.imageWithColor(UIColor.clearColor()), forState: .Normal)
+        let selectedImage = UIImage.imageWithColor(UIColor.flatWhiteColor())
+        submitButton.setBackgroundImage(selectedImage, forState: .Highlighted)
+        submitButton.setBackgroundImage(selectedImage, forState: .Selected)
+        let titleColor = UIColor.flatBlackColorDark()
+        submitButton.setTitleColor(UIColor.flatGrayColorDark(), forState: .Normal)
+        submitButton.setTitleColor(titleColor, forState: .Highlighted)
+        submitButton.setTitleColor(titleColor, forState: .Selected)
+    }
+
     @IBAction func submitButtonTapped(sender: AnyObject) {
         if let username = usernameTextField.text,
             let password = passwordTextField.text

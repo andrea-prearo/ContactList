@@ -7,7 +7,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 3.2.1)
-  - ChameleonFramework/Swift
+  - ChameleonFramework/Swift (~> 2.1.0)
   - Locksmith (~> 2.0.8)
 
 SPEC CHECKSUMS:
@@ -15,6 +15,6 @@ SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Locksmith: a8ed41ac4c06506ea8cb199d8ec8a8d3d108eb2a
 
-PODFILE CHECKSUM: 94ef28738227ea9669aa5ef76d4cf2bd1f648cab
+PODFILE CHECKSUM: 5c24fceeae1495ab04c332ace2b39d56acac9fd2
 
 COCOAPODS: 1.0.0.beta.4

@@ -18,7 +18,7 @@ class ContactsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = NSLocalizedString("Contacts", comment: "Contacts")
+        setUpStyle()
 
         Contact.getAll { [weak self] (success, contacts, error) -> () in
             if !success {
@@ -35,6 +35,17 @@ class ContactsTableViewController: UITableViewController {
                 self?.tableView.reloadData()
             }
         }
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.semiTransparentNavigationBarStyle()
+        navigationController?.hidesBarsOnSwipe = true
+    }
+
+    func setUpStyle() {
+        tableView.backgroundColor = UIColor.defaultBackgroundColor()
     }
 
     // MARK: UITableViewDataSource protocol methods
@@ -68,7 +79,7 @@ class ContactsTableViewController: UITableViewController {
             return
         }
         selectedContact = contact
-        self.performSegueWithIdentifier(SegueIdentifiers.ContactsToContactDetailSegue.rawValue, sender: self)
+        performSegueWithIdentifier(SegueIdentifiers.ContactsToContactDetailSegue.rawValue, sender: self)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -79,6 +90,9 @@ class ContactsTableViewController: UITableViewController {
                 return
             }
             destinationViewController.contact = selectedContact
+            let backItem = UIBarButtonItem()
+            backItem.title = NSLocalizedString("Back", comment: "Back")
+            navigationItem.backBarButtonItem = backItem
         }
     }
 

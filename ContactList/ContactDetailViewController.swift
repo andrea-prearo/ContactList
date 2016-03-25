@@ -7,9 +7,10 @@
 //
 
 import UIKit
-import ChameleonFramework
 
 class ContactDetailViewController: UIViewController {
+
+    @IBOutlet weak var scrollView: UIScrollView!
 
     var contact: Contact?
     
@@ -20,40 +21,38 @@ class ContactDetailViewController: UIViewController {
     @IBOutlet weak var company: UILabel!
     
     @IBOutlet weak var customBackgroundView: UIView!
+    @IBOutlet weak var mainInfoView: UIView!
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        setBackgroundColor()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setUpStyle()
         configure()
     }
 
-    func setBackgroundColor() {
-//        if let navigationController = navigationController {
-//            navigationController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-//            navigationController.navigationBar.shadowImage = UIImage()
-//            navigationController.navigationBar.translucent = true
-//            navigationController.view.backgroundColor = UIColor.clearColor()
-//            navigationController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-//            navigationController.navigationBar.shadowImage = UIImage()
-//            navigationController.navigationBar.translucent = true
-//            navigationController.navigationBar.opaque = false
-//            navigationController.view.backgroundColor = UIColor.clearColor()
-//        }
-//        navigationController?.navigationBar.setup()
-//        navigationController?.presentTransparentNavigationBar()
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.transparentNavigationBarStyle()
+    }
 
-        let colors:[UIColor] = [
-            UIColor.flatBlueColorDark(),
-            UIColor.flatWhiteColor()
-        ]
-        customBackgroundView.backgroundColor = GradientColor(.TopToBottom, frame: customBackgroundView.frame, colors: colors)
+    override func viewWillLayoutSubviews() {
+        scrollView.contentOffset = CGPointMake(0, 0)
+        let screenSize = UIScreen.mainScreen().bounds
+        scrollView.contentSize = CGSizeMake(screenSize.width, screenSize.height + 1)
     }
     
+    func setUpStyle() {
+        view.backgroundColor = UIColor.defaultGradientBackgroundColor()
+
+        mainInfoView.layer.cornerRadius = CGFloat(2.5)
+        mainInfoView.layer.borderWidth = 2.5
+        mainInfoView.layer.borderColor = UIColor.defaultContourColor().CGColor
+
+        automaticallyAdjustsScrollViewInsets = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+    }
+
     func configure() {
         guard let contact = contact
         else {
