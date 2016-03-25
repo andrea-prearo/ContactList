@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Heroku</key>
+	<dict>
+		<key>HostAddress</key>
+		<string>http://hidden-garden-53580.herokuapp.com</string>
+	</dict>
+	<key>Localhost</key>
+	<dict>
+		<key>HostAddress</key>
+		<string>http://localhost:3000</string>
+	</dict>
+</dict>
+</plist>

@@ -11,11 +11,34 @@ import Alamofire
 
 class WebServiceConstants {
 
+    private static var token: dispatch_once_t = 0
+    private static var dictionary: NSDictionary?
+
+    class var APIEnvironments: NSDictionary? {
+        dispatch_once(&token) { () -> Void in
+            if let plistpath = NSBundle.mainBundle().pathForResource("APIEnvironments", ofType: "plist"),
+                plist = NSDictionary(contentsOfFile: plistpath) {
+                dictionary = plist
+            } else {
+                dictionary = nil
+            }
+        }
+        return dictionary
+    }
+    
     // Token Header
     class var TokenHeader: String { return "x-access-token" }
     
     // Host
-    class var HostAddress: String { return "http://hidden-garden-53580.herokuapp.com" }
+    class var HostAddress: String {
+        if let environments = WebServiceConstants.APIEnvironments,
+            selectedEnvironment = NSUserDefaults.standardUserDefaults().stringForKey("environment"),
+            environmentDict = environments[selectedEnvironment] as? [String:String],
+            environment = environmentDict["HostAddress"] {
+            return environment
+        }
+        return "http://hidden-garden-53580.herokuapp.com"
+    }
     
     // Auth
     class var LogIn: String { return HostAddress + "/auth/login" }
@@ -27,7 +50,7 @@ class WebServiceConstants {
 }
 
 class WebService {
-
+    
     // Use custom error message instead of the defaule one provided by Alamofire's validate()
     class func verifyAuthenticationErrors(response: AuthResponse) -> NSError? {
         if let urlResponse = response.response,

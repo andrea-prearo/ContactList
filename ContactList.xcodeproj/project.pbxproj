@@ -19,6 +19,10 @@
 		AF52E5AD1C8B881300A7FDB9 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF52E5AC1C8B881300A7FDB9 /* WebService.swift */; };
 		AF591DC21CA4C4E60019131E /* UINavigationBar+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF591DC11CA4C4E60019131E /* UINavigationBar+Style.swift */; };
 		AF5E45E11C907ABC001BE93C /* AuthorizedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5E45E01C907ABC001BE93C /* AuthorizedUser.swift */; };
+		AF902A281CA5983E009FB1D5 /* APIEnvironments.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF902A271CA5983E009FB1D5 /* APIEnvironments.plist */; };
+		AF902A2C1CA5A645009FB1D5 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AF902A2B1CA5A645009FB1D5 /* Settings.bundle */; };
+		AF902A2E1CA5B633009FB1D5 /* UIColor+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF902A2D1CA5B633009FB1D5 /* UIColor+Style.swift */; };
+		AF902A301CA5CED6009FB1D5 /* UIImage+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF902A2F1CA5CED6009FB1D5 /* UIImage+Util.swift */; };
 		AF95ADDE1C910A7B003817AE /* ErrorCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF95ADDD1C910A7B003817AE /* ErrorCodes.swift */; };
 		AF95ADE11C9125E4003817AE /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF95ADE01C9125E4003817AE /* ContactCell.swift */; };
 		AF95ADE31C912B36003817AE /* UIImageView+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF95ADE21C912B36003817AE /* UIImageView+Util.swift */; };
@@ -49,6 +53,10 @@
 		AF52E5AC1C8B881300A7FDB9 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		AF591DC11CA4C4E60019131E /* UINavigationBar+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Style.swift"; sourceTree = "<group>"; };
 		AF5E45E01C907ABC001BE93C /* AuthorizedUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizedUser.swift; sourceTree = "<group>"; };
+		AF902A271CA5983E009FB1D5 /* APIEnvironments.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIEnvironments.plist; sourceTree = "<group>"; };
+		AF902A2B1CA5A645009FB1D5 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		AF902A2D1CA5B633009FB1D5 /* UIColor+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Style.swift"; sourceTree = "<group>"; };
+		AF902A2F1CA5CED6009FB1D5 /* UIImage+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Util.swift"; sourceTree = "<group>"; };
 		AF95ADDD1C910A7B003817AE /* ErrorCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCodes.swift; sourceTree = "<group>"; };
 		AF95ADE01C9125E4003817AE /* ContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		AF95ADE21C912B36003817AE /* UIImageView+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Util.swift"; sourceTree = "<group>"; };
@@ -128,8 +136,19 @@
 				AF95ADE21C912B36003817AE /* UIImageView+Util.swift */,
 				AF95ADE41C9130DD003817AE /* String+Util.swift */,
 				AF591DC11CA4C4E60019131E /* UINavigationBar+Style.swift */,
+				AF902A2D1CA5B633009FB1D5 /* UIColor+Style.swift */,
+				AF902A2F1CA5CED6009FB1D5 /* UIImage+Util.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		AF902A241CA59784009FB1D5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AF902A271CA5983E009FB1D5 /* APIEnvironments.plist */,
+				AF902A2B1CA5A645009FB1D5 /* Settings.bundle */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		AF95ADDF1C9125CB003817AE /* Table View Cells */ = {
@@ -144,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				AFEA5B051C8B53900066768B /* ContactList */,
+				AF902A241CA59784009FB1D5 /* Resources */,
 				AFEA5B041C8B53900066768B /* Products */,
 				2B3AE9ECD527C28FDBAE48B0 /* Pods */,
 				062F68C1E747218491E43B24 /* Frameworks */,
@@ -257,7 +277,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF902A281CA5983E009FB1D5 /* APIEnvironments.plist in Resources */,
 				AFEA5B111C8B53900066768B /* LaunchScreen.storyboard in Resources */,
+				AF902A2C1CA5A645009FB1D5 /* Settings.bundle in Resources */,
 				AFEA5B0E1C8B53900066768B /* Assets.xcassets in Resources */,
 				AFEA5B0C1C8B53900066768B /* Main.storyboard in Resources */,
 			);
@@ -331,6 +353,7 @@
 				AFADE9EA1C8CF196008B614F /* UIViewController+Util.swift in Sources */,
 				AF95ADE31C912B36003817AE /* UIImageView+Util.swift in Sources */,
 				AF95ADE11C9125E4003817AE /* ContactCell.swift in Sources */,
+				AF902A2E1CA5B633009FB1D5 /* UIColor+Style.swift in Sources */,
 				AFEEE6491C9320C200CBB284 /* SpinnerOverlay.swift in Sources */,
 				AFEA5B071C8B53900066768B /* AppDelegate.swift in Sources */,
 				AF95ADE51C9130DD003817AE /* String+Util.swift in Sources */,
@@ -340,6 +363,7 @@
 				AF2543C91C9F788B0028DF6A /* LocationData.swift in Sources */,
 				AFADE9E61C8CEBB2008B614F /* ContactsTableViewController.swift in Sources */,
 				AF04EFC81C9DF4A40037351E /* ContactDetailViewControllerViewModel.swift in Sources */,
+				AF902A301CA5CED6009FB1D5 /* UIImage+Util.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
