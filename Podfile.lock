@@ -1,15 +1,20 @@
 PODS:
   - Alamofire (3.2.1)
+  - ChameleonFramework/Default (2.1.0)
+  - ChameleonFramework/Swift (2.1.0):
+    - ChameleonFramework/Default
   - Locksmith (2.0.8)
 
 DEPENDENCIES:
   - Alamofire (~> 3.2.1)
+  - ChameleonFramework/Swift
   - Locksmith (~> 2.0.8)
 
 SPEC CHECKSUMS:
   Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Locksmith: a8ed41ac4c06506ea8cb199d8ec8a8d3d108eb2a
 
-PODFILE CHECKSUM: 32f4c254a7c7a6623d996c64ce6d22916b98adb1
+PODFILE CHECKSUM: 94ef28738227ea9669aa5ef76d4cf2bd1f648cab
 
 COCOAPODS: 1.0.0.beta.4

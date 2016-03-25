@@ -9,6 +9,8 @@
 import Foundation
 
 enum SegueIdentifiers: String {
+
     case AuthToContactsSegue = "AuthToContactsSegue"
     case ContactsToContactDetailSegue = "ContactsToContactDetailSegue"
+
 }

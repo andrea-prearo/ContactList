@@ -79,9 +79,7 @@ class ContactsTableViewController: UITableViewController {
                 return
             }
             destinationViewController.contact = selectedContact
-            let backItem = UIBarButtonItem()
-            backItem.title = NSLocalizedString("Back", comment: "Back")
-            navigationItem.backBarButtonItem = backItem
         }
     }
+
 }
