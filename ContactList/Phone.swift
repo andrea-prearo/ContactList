@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Phone {
+class Phone: Decodable {
     
     let label: String?
     let number: String?
@@ -28,20 +28,6 @@ extension Phone {
         let number = json["number"] as? String
         return Phone(label: label,
             number: number)
-    }
-
-    static func decode(json: [[String: AnyObject]]) -> [Phone?] {
-        return json.map({
-            return Phone.decode($0)
-        })
-    }
-
-    static func decode(json: [[String: AnyObject]]?) -> [Phone?] {
-        if let items = json {
-            return Phone.decode(items)
-        } else {
-            return []
-        }
     }
 
 }

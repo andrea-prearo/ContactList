@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import Locksmith
 
-class Contact {
+class Contact: Decodable {
     
     let avatar: String?
     let firstName: String?
@@ -99,12 +99,6 @@ extension Contact {
             phone: phone,
             email: email,
             location: location)
-    }
-    
-    static func decode(json: [[String: AnyObject]]) -> [Contact?] {
-        return json.map({
-            return Contact.decode($0)
-        })
     }
     
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LocationData {
+class LocationData: Decodable {
     
     let address: String?
     let city: String?
@@ -43,28 +43,6 @@ extension LocationData {
             state: state,
             country: country,
             zipCode: zipCode)
-    }
-
-    static func decode(json: [String: AnyObject]?) -> LocationData? {
-        if let item = json {
-            return LocationData.decode(item)
-        } else {
-            return nil
-        }
-    }
-    
-    static func decode(json: [[String: AnyObject]]) -> [LocationData?] {
-        return json.map({
-            return LocationData.decode($0)
-        })
-    }
-    
-    static func decode(json: [[String: AnyObject]]?) -> [LocationData?] {
-        if let items = json {
-            return LocationData.decode(items)
-        } else {
-            return []
-        }
     }
     
 }

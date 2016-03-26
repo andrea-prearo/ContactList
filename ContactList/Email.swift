@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Email {
+class Email: Decodable {
 
     let label: String?
     let address: String?
@@ -28,20 +28,6 @@ extension Email {
         let address = json["address"] as? String
         return Email(label: label,
             address: address)
-    }
-
-    static func decode(json: [[String: AnyObject]]) -> [Email?] {
-        return json.map({
-            return Email.decode($0)
-        })
-    }
-
-    static func decode(json: [[String: AnyObject]]?) -> [Email?] {
-        if let items = json {
-            return Email.decode(items)
-        } else {
-            return []
-        }
     }
 
 }
