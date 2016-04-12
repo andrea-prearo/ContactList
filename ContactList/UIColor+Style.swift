@@ -22,9 +22,5 @@ extension UIColor {
     class func defaultBackgroundColor() -> UIColor {
         return UIColor.flatPowderBlueColorDark()
     }
-    
-    class func defaultContourColor() -> UIColor {
-        return UIColor.flatGrayColor()
-    }
-    
+
 }

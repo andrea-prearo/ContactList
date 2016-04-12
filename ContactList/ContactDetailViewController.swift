@@ -46,8 +46,6 @@ class ContactDetailViewController: UIViewController {
         view.backgroundColor = UIColor.defaultGradientBackgroundColor()
 
         mainInfoView.layer.cornerRadius = CGFloat(2.5)
-        mainInfoView.layer.borderWidth = 2.5
-        mainInfoView.layer.borderColor = UIColor.defaultContourColor().CGColor
 
         automaticallyAdjustsScrollViewInsets = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
