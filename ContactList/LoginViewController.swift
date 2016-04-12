@@ -9,14 +9,21 @@
 import UIKit
 import Alamofire
 import Locksmith
+import SVProgressHUD
 
 typealias CompletionBlock = (Response<AnyObject, NSError> -> ())
+
+enum LoginViewControllerSegmentIndex: Int {
+    case LogIn = 0
+    case SignUp = 1
+}
 
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,32 +63,38 @@ class LoginViewController: UIViewController {
         if let username = usernameTextField.text,
             let password = passwordTextField.text
             where !username.isEmpty && !password.isEmpty {
-                SpinnerOverlay.sharedInstance.show(view)
-                Auth.login(email: username, password: password) { [weak self] (success, token, error) -> () in
-                    SpinnerOverlay.sharedInstance.hide()
-                    let title = "Authentication Error"
-                    if let token = token where success {
-                        guard let account = AuthorizedUser.init(email: username, password: password, token: token) else {
-                            dispatch_async(dispatch_get_main_queue()) {
-                                self?.showError(title, message: NSLocalizedString("Invalid authorization.", comment: "Invalid authorization."))
-                            }
-                            return
-                        }
-                        let _ = try? account.deleteFromSecureStore()
-                        let _ = try? account.createInSecureStore()
-                        let _ = try? Locksmith.deleteDataForUserAccount(AuthorizedUser.StoreKey)
-                        let _ = try? Locksmith.saveData(account.data, forUserAccount: AuthorizedUser.StoreKey)
-                        self?.performSegueWithIdentifier(SegueIdentifiers.AuthToContactsSegue.rawValue, sender: self)
-                    } else {
+            SVProgressHUD.show()
+            let completionBlock: WebServiceAuthCompletionBlock = {
+                [weak self] (success, token, error) -> () in
+                SVProgressHUD.dismiss()
+                let title = "Authentication Error"
+                if let token = token where success {
+                    guard let account = AuthorizedUser.init(email: username, password: password, token: token) else {
                         dispatch_async(dispatch_get_main_queue()) {
-                            if let error = error {
-                                self?.showError(title, message: error.localizedDescription)
-                            } else {
-                                self?.showError(title, message: NSLocalizedString("Authentication failed.", comment: "Authentication failed."))
-                            }
+                            self?.showError(title, message: NSLocalizedString("Invalid authorization.", comment: "Invalid authorization."))
+                        }
+                        return
+                    }
+                    let _ = try? account.deleteFromSecureStore()
+                    let _ = try? account.createInSecureStore()
+                    let _ = try? Locksmith.deleteDataForUserAccount(AuthorizedUser.StoreKey)
+                    let _ = try? Locksmith.saveData(account.data, forUserAccount: AuthorizedUser.StoreKey)
+                    self?.performSegueWithIdentifier(SegueIdentifiers.AuthToContactsSegue.rawValue, sender: self)
+                } else {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let error = error {
+                            self?.showError(title, message: error.localizedDescription)
+                        } else {
+                            self?.showError(title, message: NSLocalizedString("Authentication failed.", comment: "Authentication failed."))
                         }
                     }
                 }
+            }
+            if segmentedControl.selectedSegmentIndex == LoginViewControllerSegmentIndex.LogIn.rawValue {
+                Auth.login(email: username, password: password, completionBlock: completionBlock)
+            } else if segmentedControl.selectedSegmentIndex == LoginViewControllerSegmentIndex.SignUp.rawValue {
+                Auth.register(email: username, password: password, completionBlock: completionBlock)
+            }
         } else {
             let alertController = UIAlertController(
                 title: NSLocalizedString("Input Error", comment: "Input Error"),

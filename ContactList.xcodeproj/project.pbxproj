@@ -37,7 +37,6 @@
 		AFEA5B0C1C8B53900066768B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFEA5B0A1C8B53900066768B /* Main.storyboard */; };
 		AFEA5B0E1C8B53900066768B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFEA5B0D1C8B53900066768B /* Assets.xcassets */; };
 		AFEA5B111C8B53900066768B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFEA5B0F1C8B53900066768B /* LaunchScreen.storyboard */; };
-		AFEEE6491C9320C200CBB284 /* SpinnerOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEEE6481C9320C200CBB284 /* SpinnerOverlay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,7 +73,6 @@
 		AFEA5B0D1C8B53900066768B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFEA5B101C8B53900066768B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AFEA5B121C8B53900066768B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AFEEE6481C9320C200CBB284 /* SpinnerOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerOverlay.swift; sourceTree = "<group>"; };
 		D1F31B193AFEB5A11864B2A1 /* Pods-ContactList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContactList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ContactList/Pods-ContactList.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -192,7 +190,6 @@
 				AFEEE6471C931EEB00CBB284 /* Stores */,
 				AFEA5B061C8B53900066768B /* AppDelegate.swift */,
 				AF95ADDD1C910A7B003817AE /* ErrorCodes.swift */,
-				AFEEE6481C9320C200CBB284 /* SpinnerOverlay.swift */,
 				AFEA5B0A1C8B53900066768B /* Main.storyboard */,
 				AFEA5B0D1C8B53900066768B /* Assets.xcassets */,
 				AFEA5B0F1C8B53900066768B /* LaunchScreen.storyboard */,
@@ -358,7 +355,6 @@
 				AF95ADE31C912B36003817AE /* UIImageView+Util.swift in Sources */,
 				AF95ADE11C9125E4003817AE /* ContactCell.swift in Sources */,
 				AF902A2E1CA5B633009FB1D5 /* UIColor+Style.swift in Sources */,
-				AFEEE6491C9320C200CBB284 /* SpinnerOverlay.swift in Sources */,
 				AFEA5B071C8B53900066768B /* AppDelegate.swift in Sources */,
 				AF95ADE51C9130DD003817AE /* String+Util.swift in Sources */,
 				AF95ADDE1C910A7B003817AE /* ErrorCodes.swift in Sources */,
@@ -482,6 +478,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ContactList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aprearo.ContactList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -494,6 +491,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ContactList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aprearo.ContactList;
 				PRODUCT_NAME = "$(TARGET_NAME)";

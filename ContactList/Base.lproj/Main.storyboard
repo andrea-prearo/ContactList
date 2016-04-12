@@ -122,6 +122,7 @@
                     </view>
                     <connections>
                         <outlet property="passwordTextField" destination="khj-pz-nmn" id="wKg-En-j7l"/>
+                        <outlet property="segmentedControl" destination="mqK-cd-Wey" id="pt9-do-33R"/>
                         <outlet property="submitButton" destination="CZb-5Q-Us4" id="JiH-Bp-G5o"/>
                         <outlet property="usernameTextField" destination="QnA-8Y-od9" id="mEb-8r-KpG"/>
                         <segue destination="vPN-Sh-XSp" kind="show" identifier="AuthToContactsSegue" id="wsC-R9-jeC"/>
@@ -284,7 +285,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="l7A-QE-UAZ" secondAttribute="trailing" id="z8p-RA-m52"/>
                                                 </constraints>
                                             </view>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="9A5C2120-178C-4DDD-8B2E-281925CF3593" translatesAutoresizingMaskIntoConstraints="NO" id="B33-UV-eQ1">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="42399EC3-194C-401D-A503-59C0EFE42929" translatesAutoresizingMaskIntoConstraints="NO" id="B33-UV-eQ1">
                                                 <rect key="frame" x="254" y="44" width="92" height="92"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="92" id="Qho-jz-enD"/>
@@ -343,7 +344,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="9A5C2120-178C-4DDD-8B2E-281925CF3593" width="85" height="85">
+        <image name="42399EC3-194C-401D-A503-59C0EFE42929" width="85" height="85">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

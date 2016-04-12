@@ -4,17 +4,20 @@ PODS:
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - Locksmith (2.0.8)
+  - SVProgressHUD (2.0.3)
 
 DEPENDENCIES:
   - Alamofire (~> 3.2.1)
   - ChameleonFramework/Swift (~> 2.1.0)
   - Locksmith (~> 2.0.8)
+  - SVProgressHUD (~> 2.0.2)
 
 SPEC CHECKSUMS:
   Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Locksmith: a8ed41ac4c06506ea8cb199d8ec8a8d3d108eb2a
+  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
 
-PODFILE CHECKSUM: 5c24fceeae1495ab04c332ace2b39d56acac9fd2
+PODFILE CHECKSUM: 7ff7e2bda4808805c5038605096285d03d0d0b09
 
-COCOAPODS: 1.0.0.beta.4
+COCOAPODS: 1.0.0.beta.3

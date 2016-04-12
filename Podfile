@@ -7,4 +7,5 @@ target 'ContactList' do
   pod 'Alamofire', '~> 3.2.1'
   pod 'Locksmith', '~> 2.0.8'
   pod 'ChameleonFramework/Swift', '~> 2.1.0'
+  pod 'SVProgressHUD', '~> 2.0.3'
 end
