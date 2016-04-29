@@ -108,3 +108,15 @@ extension Contact {
     }
 
 }
+
+extension Contact: Equatable {}
+
+func ==(lhs: Contact, rhs: Contact) -> Bool {
+    return lhs.avatar == rhs.avatar &&
+        lhs.firstName == rhs.firstName &&
+        lhs.lastName == rhs.lastName &&
+        lhs.company == rhs.company &&
+        lhs.phone == rhs.phone &&
+        lhs.email == rhs.email &&
+        lhs.location == rhs.location
+}

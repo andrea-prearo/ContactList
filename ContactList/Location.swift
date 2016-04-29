@@ -31,3 +31,10 @@ extension Location {
     }
 
 }
+
+extension Location: Equatable {}
+
+func ==(lhs: Location, rhs: Location) -> Bool {
+    return lhs.label == rhs.label &&
+        lhs.data == rhs.data
+}

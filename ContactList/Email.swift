@@ -31,3 +31,10 @@ extension Email {
     }
 
 }
+
+extension Email: Equatable {}
+
+func ==(lhs: Email, rhs: Email) -> Bool {
+    return lhs.label == rhs.label &&
+        lhs.address == rhs.address
+}

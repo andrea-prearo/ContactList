@@ -46,6 +46,7 @@ class LoginViewController: UIViewController {
 
     func setUpStyle() {
         view.backgroundColor = UIColor.defaultGradientBackgroundColor()
+        navigationController?.defaultNavigationBarStyle()
 
         submitButton.layer.cornerRadius = CGFloat(2.5)
         submitButton.clipsToBounds = true

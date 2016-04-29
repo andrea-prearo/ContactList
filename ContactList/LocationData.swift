@@ -46,3 +46,13 @@ extension LocationData {
     }
     
 }
+
+extension LocationData: Equatable {}
+
+func ==(lhs: LocationData, rhs: LocationData) -> Bool {
+    return lhs.address == rhs.address &&
+        lhs.city == rhs.city &&
+        lhs.state == rhs.state &&
+        lhs.country == rhs.country &&
+        lhs.zipCode == rhs.zipCode
+}

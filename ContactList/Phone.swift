@@ -31,3 +31,10 @@ extension Phone {
     }
 
 }
+
+extension Phone: Equatable {}
+
+func ==(lhs: Phone, rhs: Phone) -> Bool {
+    return lhs.label == rhs.label &&
+        lhs.number == rhs.number
+}

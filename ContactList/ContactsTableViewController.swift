@@ -71,10 +71,7 @@ class ContactsTableViewController: UITableViewController {
             contacts = contacts {
             tableView.beginUpdates()
 
-            var temp = contacts
-            temp.removeAtIndex(indexPath.row)
-            self.contacts = temp
-
+            self.contacts = contacts.dropAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             selectedIndexPath = nil
             
