@@ -27,9 +27,7 @@ class ContactDetailViewControllerViewModel {
         }
         
         // Username
-        let firstName = String.emptyForNilOptional(contact.firstName)
-        let lastName = String.emptyForNilOptional(contact.lastName)
-        username = "\(firstName) \(lastName)"
+        username = contact.fullName
         
         // Company
         company = String.emptyForNilOptional(contact.company)

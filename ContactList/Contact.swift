@@ -100,5 +100,11 @@ extension Contact {
             email: email,
             location: location)
     }
-    
+
+    var fullName: String {
+        let first = String.emptyForNilOptional(firstName)
+        let last = String.emptyForNilOptional(lastName)
+        return "\(first) \(last)"
+    }
+
 }

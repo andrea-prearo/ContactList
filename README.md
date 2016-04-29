@@ -2,7 +2,7 @@
 Sample app to interact with the [Node/Express/MongoDB web service example](https://github.com/andrea-prearo/node-contact-list-webservice)
 
 # TODO
-- Network controller
+- Network controller? (https://realm.io/news/slug-marcus-zarra-exploring-mvcn-swift/)
 - Scheme config: CoreData .vs. API
 - User logout / autologin / handle expired token
 - Add/edit/delete contacts (only with new accounts)

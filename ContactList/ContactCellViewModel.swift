@@ -27,9 +27,7 @@ class ContactCellViewModel {
         }
         
         // Username
-        let firstName = String.emptyForNilOptional(contact.firstName)
-        let lastName = String.emptyForNilOptional(contact.lastName)
-        username = "\(firstName) \(lastName)"
+        username = contact.fullName
         
         // Address
         if let firstLocation = contact.location?.first,

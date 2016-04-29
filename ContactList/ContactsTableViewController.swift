@@ -13,7 +13,7 @@ let ContactCellId = "ContactCell"
 class ContactsTableViewController: UITableViewController {
 
     private var contacts: [Contact?]?
-    private var selectedContact: Contact?
+    private var selectedIndexPath: NSIndexPath? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +37,53 @@ class ContactsTableViewController: UITableViewController {
         }
     }
 
+    // MARK: Private Methods
+    
     func setUpStyle() {
         tableView.backgroundColor = UIColor.defaultBackgroundColor()
+    }
+
+    func showDeleteContactAlert(contact: Contact) {
+        let formatString = NSLocalizedString("Are you sure you want to delete %@?", comment: "Are you sure you want to delete this contact?")
+        let contactName: String
+        if let _ = contact.firstName,
+            _ = contact.lastName {
+            contactName = contact.fullName
+        } else {
+            contactName = NSLocalizedString("this contact", comment: "this contact")
+        }
+        let message = String(format: formatString, contactName)
+        let alert = UIAlertController(title: NSLocalizedString("Delete Contact", comment: "Delete Contact"),
+            message: message,
+            preferredStyle: .Alert)
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: handleDeleteContact)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelDeleteContact)
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func handleDeleteContact(alertAction: UIAlertAction!) -> Void {
+        if let indexPath = selectedIndexPath,
+            contacts = contacts {
+            tableView.beginUpdates()
+
+            var temp = contacts
+            temp.removeAtIndex(indexPath.row)
+            self.contacts = temp
+
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            selectedIndexPath = nil
+            
+            tableView.endUpdates()
+        }
+    }
+    
+    func cancelDeleteContact(alertAction: UIAlertAction!) {
+        selectedIndexPath = nil
     }
 
     // MARK: UITableViewDataSource protocol methods
@@ -66,23 +111,33 @@ class ContactsTableViewController: UITableViewController {
     // MARK: UITableViewDelegate protocol methods
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        guard let contacts = contacts,
-            contact = contacts[indexPath.row]
-        else {
-            return
-        }
-        selectedContact = contact
+        selectedIndexPath = indexPath
         performSegueWithIdentifier(SegueIdentifiers.ContactsToContactDetailSegue.rawValue, sender: self)
     }
+
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            selectedIndexPath = indexPath
+            guard let contacts = contacts,
+                contact = contacts[indexPath.row]
+            else {
+                return
+            }
+            showDeleteContactAlert(contact)
+        }
+    }
+
+    // MARK: Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == SegueIdentifiers.ContactsToContactDetailSegue.rawValue {
             guard let destinationViewController = segue.destinationViewController as? ContactDetailViewController,
-                _ = selectedContact
+                contacts = contacts,
+                selectedIndexPath = selectedIndexPath
                 else {
                 return
             }
-            destinationViewController.contact = selectedContact
+            destinationViewController.contact = contacts[selectedIndexPath.row]
             let backItem = UIBarButtonItem()
             backItem.title = NSLocalizedString("Back", comment: "Back")
             navigationItem.backBarButtonItem = backItem
