@@ -37,13 +37,6 @@ class ContactsTableViewController: UITableViewController {
         }
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
-        navigationController?.semiTransparentNavigationBarStyle()
-        navigationController?.hidesBarsOnSwipe = true
-    }
-
     func setUpStyle() {
         tableView.backgroundColor = UIColor.defaultBackgroundColor()
     }

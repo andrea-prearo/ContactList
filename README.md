@@ -2,13 +2,10 @@
 Sample app to interact with the [Node/Express/MongoDB web service example](https://github.com/andrea-prearo/node-contact-list-webservice)
 
 # TODO
+- Network controller
 - Scheme config: CoreData .vs. API
-- Create generic Decodable Protocol for:
--- static func decode(json: [[String: AnyObject]]) -> [Location?]
--- static func decode(json: [[String: AnyObject]]?) -> [Location?]
 - User logout / autologin / handle expired token
-- Add/edit/delete contacts
-- Alphabetic index?
+- Add/edit/delete contacts (only with new accounts)
 - Search
 
 # Credits

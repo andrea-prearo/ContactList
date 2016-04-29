@@ -10,6 +10,7 @@ import Foundation
 
 protocol Decodable {
     typealias DecodableType
+//    associatedtype DecodableType
 
     static func decode(json: [String: AnyObject]) -> DecodableType?
     static func decode(json: [String: AnyObject]?) -> DecodableType?

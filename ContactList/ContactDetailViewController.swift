@@ -30,12 +30,6 @@ class ContactDetailViewController: UIViewController {
         configure()
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.transparentNavigationBarStyle()
-    }
-
     override func viewWillLayoutSubviews() {
         scrollView.contentOffset = CGPointMake(0, 0)
         let screenSize = UIScreen.mainScreen().bounds
