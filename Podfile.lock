@@ -3,21 +3,24 @@ PODS:
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
+  - LiteJSONConvertible (0.0.4)
   - Locksmith (2.0.8)
   - SVProgressHUD (2.0.3)
 
 DEPENDENCIES:
   - Alamofire (~> 3.2.1)
   - ChameleonFramework/Swift (~> 2.1.0)
+  - LiteJSONConvertible (~> 0.0.4)
   - Locksmith (~> 2.0.8)
-  - SVProgressHUD (~> 2.0.2)
+  - SVProgressHUD (~> 2.0.3)
 
 SPEC CHECKSUMS:
   Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  LiteJSONConvertible: 61a6510fae357fce28a51466cdb86c0348d6ea60
   Locksmith: a8ed41ac4c06506ea8cb199d8ec8a8d3d108eb2a
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
 
-PODFILE CHECKSUM: 7ff7e2bda4808805c5038605096285d03d0d0b09
+PODFILE CHECKSUM: 6392a3a53497d5943678748f1e7636555b623080
 
 COCOAPODS: 1.0.0.beta.3

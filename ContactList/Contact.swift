@@ -9,8 +9,9 @@
 import Foundation
 import Alamofire
 import Locksmith
+import LiteJSONConvertible
 
-class Contact: Decodable {
+struct Contact {
     
     let avatar: String?
     let firstName: String?
@@ -19,8 +20,8 @@ class Contact: Decodable {
     let phone: [Phone?]?
     let email: [Email?]?
     let location: [Location?]?
-
-    init?(avatar: String?,
+    
+    init(avatar: String?,
         firstName: String?,
         lastName: String?,
         company: String?,
@@ -36,7 +37,7 @@ class Contact: Decodable {
         self.location = location
     }
     
-    class func getAll(completionBlock: (success: Bool, contacts: [Contact?]?, error: NSError?) -> ()) {
+    static func getAll(completionBlock: (success: Bool, contacts: [Contact?]?, error: NSError?) -> ()) {
         let account = AuthorizedUser.loadFromStore()
         if account.isFailure {
             completionBlock(success: false, contacts: nil, error: account.error)
@@ -67,14 +68,12 @@ class Contact: Decodable {
                 return
             }
 
-            guard let jsonResponse = response.result.value as? [[String: AnyObject]] else {
+            guard let jsonResponse = response.result.value as? [JSON] else {
                 completionBlock(success: false, contacts: nil, error: nil)
                 return
             }
 
-            let contacts = jsonResponse.map({
-                return Contact.decode($0)
-            })
+            let contacts = jsonResponse.map(Contact.decode)
 
             completionBlock(success: true, contacts: contacts, error: nil)
         }
@@ -82,24 +81,7 @@ class Contact: Decodable {
     
 }
 
-extension Contact {
-    
-    static func decode(json: [String: AnyObject]) -> Contact? {
-        let avatar = json["avatar"] as? String
-        let firstName = json["firstName"] as? String
-        let lastName = json["lastName"] as? String
-        let company = json["company"] as? String
-        let phone = Phone.decode(json["phone"] as? [[String: AnyObject]])
-        let email = Email.decode(json["email"]as? [[String: AnyObject]])
-        let location = Location.decode(json["location"] as? [[String: AnyObject]])
-        return Contact(avatar: avatar,
-            firstName: firstName,
-            lastName: lastName,
-            company: company,
-            phone: phone,
-            email: email,
-            location: location)
-    }
+extension Contact: JSONDecodable {
 
     var fullName: String {
         let first = String.emptyForNilOptional(firstName)
@@ -107,6 +89,17 @@ extension Contact {
         return "\(first) \(last)"
     }
 
+    static func decode(json: JSON) -> Contact? {
+        return Contact(
+            avatar: json <| "avatar",
+            firstName: json <| "firstName",
+            lastName: json <| "lastName",
+            company: json <| "company",
+            phone: json <|| "phone" >>> Phone.decode,
+            email: json <|| "email" >>> Email.decode,
+            location: json <|| "location" >>> Location.decode)
+    }
+    
 }
 
 extension Contact: Equatable {}

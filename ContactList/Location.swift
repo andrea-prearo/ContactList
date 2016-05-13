@@ -7,29 +7,29 @@
 //
 
 import Foundation
+import LiteJSONConvertible
 
-class Location: Decodable {
-
+struct Location {
+    
     let label: String?
     let data: LocationData?
-
-    init?(label: String?,
+    
+    init(label: String?,
         data: LocationData?) {
         self.label = label
         self.data = data
     }
-
+    
 }
 
-extension Location {
-
-    static func decode(json: [String: AnyObject]) -> Location? {
-        let label = json["label"] as? String
-        let data = LocationData.decode(json["data"] as? [String: AnyObject])
-        return Location(label: label,
-            data: data)
+extension Location: JSONDecodable {
+    
+    static func decode(json: JSON) -> Location? {
+        return Location(
+            label: json <| "label",
+            data: json <| "data" >>> LocationData.decode)
     }
-
+    
 }
 
 extension Location: Equatable {}

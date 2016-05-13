@@ -7,29 +7,29 @@
 //
 
 import Foundation
+import LiteJSONConvertible
 
-class Email: Decodable {
-
+struct Email {
+    
     let label: String?
     let address: String?
-
-    init?(label: String?,
+    
+    init(label: String?,
         address: String?) {
         self.label = label
         self.address = address
     }
-
+    
 }
 
-extension Email {
-
-    static func decode(json: [String: AnyObject]) -> Email? {
-        let label = json["label"] as? String
-        let address = json["address"] as? String
-        return Email(label: label,
-            address: address)
+extension Email: JSONDecodable {
+    
+    static func decode(json: JSON) -> Email? {
+        return Email(
+            label: json <| "label",
+            address: json <| "address")
     }
-
+    
 }
 
 extension Email: Equatable {}

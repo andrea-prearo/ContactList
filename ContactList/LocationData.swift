@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import LiteJSONConvertible
 
-class LocationData: Decodable {
+struct LocationData {
     
     let address: String?
     let city: String?
@@ -16,33 +17,29 @@ class LocationData: Decodable {
     let country: String?
     let zipCode: String?
     
-    init?(address: String?,
+    init(address: String?,
         city: String?,
         state: String?,
         country: String?,
         zipCode: String?) {
-            self.address = address
-            self.city = city
-            self.state = state
-            self.country = country
-            self.zipCode = zipCode
+        self.address = address
+        self.city = city
+        self.state = state
+        self.country = country
+        self.zipCode = zipCode
     }
     
 }
 
-extension LocationData {
+extension LocationData: JSONDecodable {
     
-    static func decode(json: [String: AnyObject]) -> LocationData? {
-        let address = json["address"] as? String
-        let city = json["city"] as? String
-        let state = json["state"] as? String
-        let country = json["country"] as? String
-        let zipCode = json["zipCode"] as? String
-        return LocationData(address: address,
-            city: city,
-            state: state,
-            country: country,
-            zipCode: zipCode)
+    static func decode(json: JSON) -> LocationData? {
+        return LocationData(
+            address: json <| "address",
+            city: json <| "city",
+            state: json <| "state",
+            country: json <| "country",
+            zipCode: json <| "zipCode")
     }
     
 }

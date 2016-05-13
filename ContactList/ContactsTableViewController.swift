@@ -131,7 +131,7 @@ class ContactsTableViewController: UITableViewController {
             guard let destinationViewController = segue.destinationViewController as? ContactDetailViewController,
                 contacts = contacts,
                 selectedIndexPath = selectedIndexPath
-                else {
+            else {
                 return
             }
             destinationViewController.contact = contacts[selectedIndexPath.row]

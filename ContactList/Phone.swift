@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import LiteJSONConvertible
 
-class Phone: Decodable {
+struct Phone {
     
     let label: String?
     let number: String?
     
-    init?(label: String?,
+    init(label: String?,
         number: String?) {
         self.label = label
         self.number = number
@@ -21,15 +22,14 @@ class Phone: Decodable {
     
 }
 
-extension Phone {
+extension Phone: JSONDecodable {
     
-    static func decode(json: [String: AnyObject]) -> Phone? {
-        let label = json["label"] as? String
-        let number = json["number"] as? String
-        return Phone(label: label,
-            number: number)
+    static func decode(json: JSON) -> Phone? {
+        return Phone(
+            label: json <| "label",
+            number: json <| "number")
     }
-
+    
 }
 
 extension Phone: Equatable {}

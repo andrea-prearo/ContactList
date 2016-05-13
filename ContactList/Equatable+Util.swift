@@ -14,25 +14,29 @@ import Foundation
 // https://forums.developer.apple.com/thread/7172
 
 func ==<T: Equatable>(lhs: [T]?, rhs: [T]?) -> Bool {
-    if let lhs = lhs,
-        rhs = rhs {
-            return lhs == rhs
-    } else {
+    switch (lhs,rhs) {
+    case (.Some(let lhs), .Some(let rhs)):
+        return lhs == rhs
+    case (.None, .None):
+        return true
+    default:
         return false
     }
 }
 
 func ==<T: Equatable>(lhs: [T?]?, rhs: [T?]?) -> Bool {
-    if let lhs = lhs,
-        rhs = rhs {
+    switch (lhs,rhs) {
+    case (.Some(let lhs), .Some(let rhs)):
         if let lhsNonNil = lhs.unwrap(),
             rhsNonNil = rhs.unwrap()
-        where lhsNonNil.count == rhsNonNil.count {
+            where lhsNonNil.count == rhsNonNil.count {
             return lhsNonNil == rhsNonNil
         } else {
             return false
         }
-    } else {
+    case (.None, .None):
+        return true
+    default:
         return false
     }
 }

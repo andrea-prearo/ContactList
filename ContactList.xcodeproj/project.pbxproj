@@ -32,7 +32,6 @@
 		AFADE9E31C8CE074008B614F /* SegueIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFADE9E21C8CE074008B614F /* SegueIdentifiers.swift */; };
 		AFADE9E61C8CEBB2008B614F /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFADE9E51C8CEBB2008B614F /* ContactsTableViewController.swift */; };
 		AFADE9EA1C8CF196008B614F /* UIViewController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFADE9E91C8CF196008B614F /* UIViewController+Util.swift */; };
-		AFC0CDB41CA609CD00DEE6E1 /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC0CDB31CA609CD00DEE6E1 /* Decodable.swift */; };
 		AFE800E61CD389ED00D06DA6 /* Array+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE800E51CD389ED00D06DA6 /* Array+Util.swift */; };
 		AFEA5B071C8B53900066768B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEA5B061C8B53900066768B /* AppDelegate.swift */; };
 		AFEA5B091C8B53900066768B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEA5B081C8B53900066768B /* LoginViewController.swift */; };
@@ -68,7 +67,6 @@
 		AFADE9E21C8CE074008B614F /* SegueIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueIdentifiers.swift; sourceTree = "<group>"; };
 		AFADE9E51C8CEBB2008B614F /* ContactsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		AFADE9E91C8CF196008B614F /* UIViewController+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Util.swift"; sourceTree = "<group>"; };
-		AFC0CDB31CA609CD00DEE6E1 /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
 		AFE800E51CD389ED00D06DA6 /* Array+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Util.swift"; sourceTree = "<group>"; };
 		AFEA5B031C8B53900066768B /* ContactList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFEA5B061C8B53900066768B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -121,7 +119,6 @@
 		AF52E5A91C8B84B600A7FDB9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AFC0CDB31CA609CD00DEE6E1 /* Decodable.swift */,
 				AFADE9DE1C8CD41D008B614F /* Auth.swift */,
 				AF52E5AA1C8B84C300A7FDB9 /* Contact.swift */,
 				AF04A9031C9E521B00F2035B /* Email.swift */,
@@ -355,7 +352,6 @@
 				AF591DC21CA4C4E60019131E /* UINavigationBar+Style.swift in Sources */,
 				AF52E5AD1C8B881300A7FDB9 /* WebService.swift in Sources */,
 				AFADE9E31C8CE074008B614F /* SegueIdentifiers.swift in Sources */,
-				AFC0CDB41CA609CD00DEE6E1 /* Decodable.swift in Sources */,
 				AF04A9041C9E521B00F2035B /* Email.swift in Sources */,
 				AF04EFC61C9DEBAD0037351E /* ContactDetailViewController.swift in Sources */,
 				AFADE9EA1C8CF196008B614F /* UIViewController+Util.swift in Sources */,
