@@ -2,8 +2,8 @@
 //  Auth.swift
 //  ContactList
 //
-//  Created by Prearo, Andrea on 3/6/16.
-//  Copyright © 2016 Prearo, Andrea. All rights reserved.
+//  Created by Andrea Prearo on 3/6/16.
+//  Copyright © 2016 Andrea Prearo
 //
 
 import Foundation
