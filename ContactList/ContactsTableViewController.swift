@@ -11,14 +11,22 @@ import UIKit
 let ContactCellId = "ContactCell"
 
 class ContactsTableViewController: UITableViewController {
+    
+    static let scopeButtonTitleDefault = NSLocalizedString("Default", comment: "Default")
+    static let scopeButtonTitleFirstName = NSLocalizedString("First Name", comment: "First Name")
+    static let scopeButtonTitleLastName = NSLocalizedString("Last Name", comment: "Last Name")
+    static let scopeButtonTitleCompany = NSLocalizedString("Company", comment: "Company")
 
     private var contacts: [Contact?]?
+    private var filteredContacts: [Contact?]?
     private var selectedIndexPath: NSIndexPath? = nil
+    private let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setUpStyle()
+        setupSearchBar()
 
         Contact.getAll { [weak self] (success, contacts, error) -> () in
             if !success {
@@ -38,9 +46,22 @@ class ContactsTableViewController: UITableViewController {
     }
 
     // MARK: Private Methods
-    
+
     func setUpStyle() {
         tableView.backgroundColor = UIColor.defaultBackgroundColor()
+    }
+
+    func setupSearchBar() {
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+        definesPresentationContext = true
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.scopeButtonTitles = [
+            ContactsTableViewController.scopeButtonTitleDefault,
+            ContactsTableViewController.scopeButtonTitleFirstName,
+            ContactsTableViewController.scopeButtonTitleLastName,
+            ContactsTableViewController.scopeButtonTitleCompany]
+        tableView.tableHeaderView = searchController.searchBar
     }
 
     func showDeleteContactAlert(contact: Contact) {
@@ -57,8 +78,10 @@ class ContactsTableViewController: UITableViewController {
             message: message,
             preferredStyle: .Alert)
         
-        let deleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: handleDeleteContact)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelDeleteContact)
+        let deleteActionString = NSLocalizedString("Delete", comment: "Delete")
+        let deleteAction = UIAlertAction(title: deleteActionString, style: .Destructive, handler: handleDeleteContact)
+        let cancelActionString = NSLocalizedString("Cancel", comment: "Cancel")
+        let cancelAction = UIAlertAction(title: cancelActionString, style: .Cancel, handler: cancelDeleteContact)
         
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
@@ -83,9 +106,39 @@ class ContactsTableViewController: UITableViewController {
         selectedIndexPath = nil
     }
 
+    func filterContacts(searchText: String, scope: String) {
+        filteredContacts = contacts?.filter({( contact : Contact?) -> Bool in
+            guard let contact = contact else { return false }
+            if scope == ContactsTableViewController.scopeButtonTitleDefault {
+                return String.caseInsensitiveContains(contact.fullName, searchText: searchText)
+            } else if scope == ContactsTableViewController.scopeButtonTitleFirstName {
+                return String.caseInsensitiveContains(contact.firstName, searchText: searchText)
+            } else if scope == ContactsTableViewController.scopeButtonTitleLastName {
+                return String.caseInsensitiveContains(contact.lastName, searchText: searchText)
+            } else if scope == ContactsTableViewController.scopeButtonTitleCompany {
+                return String.caseInsensitiveContains(contact.company, searchText: searchText)
+            }
+            return false
+        })
+        tableView.reloadData()
+    }
+
+    var isSearchBarActive: Bool {
+        get {
+            return searchController.active && searchController.searchBar.text?.isEmpty == false
+        }
+    }
+
     // MARK: UITableViewDataSource protocol methods
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isSearchBarActive {
+            if let filteredContacts = filteredContacts {
+                return filteredContacts.count
+            } else {
+                return 0
+            }
+        }
         if let contacts = contacts {
             return contacts.count
         } else {
@@ -95,12 +148,24 @@ class ContactsTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(ContactCellId, forIndexPath: indexPath) as! ContactCell
-        guard let contacts = contacts,
-            contact = contacts[indexPath.row]
-        else {
-            return cell
+        let contact: Contact
+        if isSearchBarActive {
+            guard let filteredContacts = filteredContacts,
+                contactForRow = filteredContacts[indexPath.row]
+            else {
+                return cell
+            }
+            contact = contactForRow
+        } else {
+            guard let contacts = contacts,
+                contactForRow = contacts[indexPath.row]
+            else {
+                return cell
+            }
+            contact = contactForRow
         }
 
+        // TODO: the view model(s) could be cached to improve performances!
         cell.configure(ContactCellViewModel(contact: contact))
         return cell
     }
@@ -139,6 +204,28 @@ class ContactsTableViewController: UITableViewController {
             backItem.title = NSLocalizedString("Back", comment: "Back")
             navigationItem.backBarButtonItem = backItem
         }
+    }
+
+}
+
+// MARK: UISearchBarDelegate Delegate
+
+extension ContactsTableViewController: UISearchBarDelegate {
+
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterContacts(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+    }
+
+}
+
+// MARK: UISearchResultsUpdating Delegate
+
+extension ContactsTableViewController: UISearchResultsUpdating {
+
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        filterContacts(searchController.searchBar.text!, scope: scope)
     }
 
 }

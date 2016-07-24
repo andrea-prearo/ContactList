@@ -20,4 +20,9 @@ extension String {
         return string
     }
 
+    static func caseInsensitiveContains(optionalString: String?, searchText: String) -> Bool {
+        guard let sourceString = optionalString else { return false }
+        return sourceString.lowercaseString.containsString(searchText.lowercaseString)
+    }
+    
 }
