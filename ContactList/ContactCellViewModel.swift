@@ -12,7 +12,7 @@ class ContactCellViewModel {
 
     let avatarUrl: String?
     let username: String
-    let address: String
+    let company: String
 
     private let contact: Contact
 
@@ -29,16 +29,8 @@ class ContactCellViewModel {
         // Username
         username = contact.fullName
         
-        // Address
-        if let firstLocation = contact.location?.first,
-            location = firstLocation,
-            data = location.data {
-            let city = String.emptyForNilOptional(data.city)
-            let state = String.emptyForNilOptional(data.state)
-            address = "\(city), \(state)"
-        } else {
-            address = ", "
-        }
+        // Company
+        company = contact.company ?? ""
     }
     
 }

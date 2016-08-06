@@ -12,12 +12,13 @@
 import Foundation
 
 protocol OptionalType {
-    typealias W
+    associatedtype W
     var optional: W? { get }
 }
 
 extension Optional: OptionalType {
     typealias W = Wrapped
+
     var optional: W? { return self }
 }
 
@@ -40,7 +41,7 @@ extension Array {
     
     func filterElement(index: Int) -> [Element] {
         var result = [Element]()
-        for (var i=0; i < count; i++) {
+        for i in 0 ..< count {
             if i != index {
                 result.append(self[i])
             }

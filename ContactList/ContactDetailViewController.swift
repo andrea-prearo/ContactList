@@ -19,6 +19,7 @@ class ContactDetailViewController: UIViewController {
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var company: UILabel!
+    @IBOutlet weak var address: UILabel!
     
     @IBOutlet weak var customBackgroundView: UIView!
     @IBOutlet weak var mainInfoView: UIView!
@@ -62,6 +63,7 @@ class ContactDetailViewController: UIViewController {
         }
         username.text = viewModel.username
         company.text = viewModel.company
+        address.text = viewModel.address
     }
     
 }

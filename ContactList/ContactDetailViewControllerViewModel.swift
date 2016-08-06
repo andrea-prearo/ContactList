@@ -13,6 +13,7 @@ class ContactDetailViewControllerViewModel {
     let avatarUrl: String?
     let username: String
     let company: String
+    let address: String
     
     private let contact: Contact
     
@@ -31,6 +32,9 @@ class ContactDetailViewControllerViewModel {
         
         // Company
         company = String.emptyForNilOptional(contact.company)
+        
+        // Address
+        address = contact.address
     }
     
 }

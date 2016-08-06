@@ -89,6 +89,18 @@ extension Contact: JSONDecodable {
         return "\(first) \(last)"
     }
 
+    var address: String {
+        if let firstLocation = location?.first,
+            location = firstLocation,
+            data = location.data {
+            let city = String.emptyForNilOptional(data.city)
+            let state = String.emptyForNilOptional(data.state)
+            return "\(city), \(state)"
+        } else {
+            return ", "
+        }
+    }
+    
     static func decode(json: JSON) -> Contact? {
         return Contact(
             avatar: json <| "avatar",

@@ -12,7 +12,7 @@ class ContactCell: UITableViewCell {
 
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var username: UILabel!
-    @IBOutlet weak var address: UILabel!
+    @IBOutlet weak var company: UILabel!
 
     private var viewModel: ContactCellViewModel?
 
@@ -23,7 +23,7 @@ class ContactCell: UITableViewCell {
             avatar.downloadImageFromUrl(url)
         }
         username.text = viewModel.username
-        address.text = viewModel.address
+        company.text = viewModel.company
     }
 
 }
