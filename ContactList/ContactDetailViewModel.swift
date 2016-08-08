@@ -1,5 +1,5 @@
 //
-//  ContactDetailViewControllerViewModel.swift
+//  ContactDetailViewModel.swift
 //  ContactList
 //
 //  Created by Andrea Prearo on 3/19/16.
@@ -8,20 +8,16 @@
 
 import Foundation
 
-class ContactDetailViewControllerViewModel {
+class ContactDetailViewModel {
     
     let avatarUrl: String?
     let username: String
     let company: String
     let address: String
     
-    private let contact: Contact
-    
     init(contact: Contact) {
-        self.contact = contact
-        
         // Avatar
-        if let url = self.contact.avatar {
+        if let url = contact.avatar {
             avatarUrl = url
         } else {
             avatarUrl = nil

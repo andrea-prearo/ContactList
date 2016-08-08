@@ -13,8 +13,6 @@ class ContactDetailViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
 
     var contact: Contact?
-    
-    private var viewModel: ContactDetailViewControllerViewModel?
 
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var username: UILabel!
@@ -52,11 +50,7 @@ class ContactDetailViewController: UIViewController {
             return
         }
 
-        viewModel = ContactDetailViewControllerViewModel(contact: contact)
-        guard let viewModel = viewModel
-            else {
-                return
-        }
+        let viewModel = ContactDetailViewModel(contact: contact)
 
         if let url = viewModel.avatarUrl {
             avatar.downloadImageFromUrl(url)

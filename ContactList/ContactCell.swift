@@ -14,11 +14,7 @@ class ContactCell: UITableViewCell {
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var company: UILabel!
 
-    private var viewModel: ContactCellViewModel?
-
-    func configure(viewModel: ContactCellViewModel) {
-        self.viewModel = viewModel
-
+    func configure(viewModel: ContactViewModel) {
         if let url = viewModel.avatarUrl {
             avatar.downloadImageFromUrl(url)
         }

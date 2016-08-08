@@ -35,22 +35,22 @@ extension Array where Element: OptionalType {
 
 }
 
-// Extension to support a more functional approach to array handling
+// Extensions to support a more functional approach to array handling
 
 extension Array {
     
-    func filterElement(index: Int) -> [Element] {
-        var result = [Element]()
-        for i in 0 ..< count {
-            if i != index {
-                result.append(self[i])
-            }
-        }
-        return result
-    }
-
     func dropAtIndex(index: Int) -> [Element] {
-        return filterElement(index)
+        var copy = self
+        copy.removeAtIndex(index)
+        return copy
+    }
+    
+}
+
+extension Array where Element: Equatable {
+    
+    func drop(element: Element) -> [Element] {
+        return filter({ $0 != element })
     }
     
 }
