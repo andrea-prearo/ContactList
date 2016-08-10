@@ -44,6 +44,12 @@ class ContactDetailViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
     }
 
+}
+
+// MARK: Private Methods
+
+private extension ContactDetailViewController {
+
     func configure() {
         guard let contact = contact
         else {

@@ -10,7 +10,7 @@ import UIKit
 
 extension UIImageView {
 
-    class func defaultAvatarImage() -> UIImage? {
+    static func defaultAvatarImage() -> UIImage? {
         return UIImage(named: "Avatar")
     }
 
@@ -33,7 +33,11 @@ extension UIImageView {
         }).resume()
     }
 
-    private func setRoundedImage(image: UIImage?) {
+}
+
+private extension UIImageView {
+    
+    func setRoundedImage(image: UIImage?) {
         guard let image = image else {
             return
         }
@@ -45,7 +49,7 @@ extension UIImageView {
         }
     }
 
-    private func roundedImage(cornerRadius: CGFloat, withBorder: Bool = true) {
+    func roundedImage(cornerRadius: CGFloat, withBorder: Bool = true) {
         layer.borderWidth = 1.0
         layer.masksToBounds = false
         layer.cornerRadius = cornerRadius

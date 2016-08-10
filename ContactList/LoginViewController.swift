@@ -44,6 +44,12 @@ class LoginViewController: UIViewController {
         }
     }
 
+}
+
+// MARK: Private Methods
+
+private extension LoginViewController {
+
     func setUpStyle() {
         view.backgroundColor = UIColor.defaultGradientBackgroundColor()
         navigationController?.defaultNavigationBarStyle()

@@ -14,15 +14,19 @@ typealias AuthResponse = Response<AnyObject, NSError>
 
 class Auth {
 
-    class func login(email email: String, password: String, completionBlock: WebServiceAuthCompletionBlock) {
+    static func login(email email: String, password: String, completionBlock: WebServiceAuthCompletionBlock) {
         authorize(email: email, password: password, path: WebServiceConstants.LogIn, completionBlock: completionBlock)
     }
 
-    class func register(email email: String, password: String, completionBlock: WebServiceAuthCompletionBlock) {
+    static func register(email email: String, password: String, completionBlock: WebServiceAuthCompletionBlock) {
         authorize(email: email, password: password, path: WebServiceConstants.SignUp, completionBlock: completionBlock)
     }
 
-    private class func authorize(email email: String,
+}
+
+private extension Auth {
+
+    static func authorize(email email: String,
         password: String,
         path: String,
         completionBlock: WebServiceAuthCompletionBlock) {

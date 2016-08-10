@@ -11,7 +11,7 @@ import CoreGraphics
 
 extension UIImage {
 
-    class func imageWithColor(colour: UIColor) -> UIImage {
+    static func imageWithColor(colour: UIColor) -> UIImage {
         let rect = CGRectMake(0, 0, 1, 1)
         
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)

@@ -51,8 +51,8 @@ class WebServiceConstants {
 
 class WebService {
     
-    // Use custom error message instead of the defaule one provided by Alamofire's validate()
-    class func verifyAuthenticationErrors(response: AuthResponse) -> NSError? {
+    // Use custom error message instead of the default one provided by Alamofire's validate()
+    static func verifyAuthenticationErrors(response: AuthResponse) -> NSError? {
         if let urlResponse = response.response,
             jsonResponse = response.result.value as? [String: AnyObject],
             message = jsonResponse["message"] {
@@ -65,7 +65,7 @@ class WebService {
         return nil
     }
     
-    class func ping(completionBlock: (success: Bool, error: NSError?) -> ()) {
+    static func ping(completionBlock: (success: Bool, error: NSError?) -> ()) {
         Alamofire.request(
             .GET,
             WebServiceConstants.HostAddress)

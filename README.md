@@ -3,7 +3,7 @@ Sample app to interact with the [Node/Express/MongoDB web service example](https
 
 ## Features:
 - MVVM Architecture
-- Functional [`dropItemAtIndex`](https://github.com/andrea-prearo/ContactList/blob/master/ContactList/Array%2BUtil.swift#L52) method to remove item from array (just an experiment on functional concepts)
+- Experiments on functional array manipulation: [`dropItemAtIndex`](https://github.com/andrea-prearo/ContactList/blob/master/ContactList/Array%2BUtil.swift#L42) and [`dropElement`](https://github.com/andrea-prearo/ContactList/blob/master/ContactList/Array%2BUtil.swift#L52)
 
 # Credits
 - Default avatar based on avatar icon made by [Freepik](http://www.freepik.com) from [Flaticon](http://www.flaticon.com) is licensed by [CC BY 3.0 BY](http://creativecommons.org/licenses/by/3.0/).

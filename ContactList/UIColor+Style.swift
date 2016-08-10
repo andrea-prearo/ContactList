@@ -11,7 +11,7 @@ import ChameleonFramework
 
 extension UIColor {
 
-    class func defaultGradientBackgroundColor() -> UIColor {
+    static func defaultGradientBackgroundColor() -> UIColor {
         let colors:[UIColor] = [
             UIColor.flatBlueColorDark(),
             UIColor.flatWhiteColor()
@@ -19,7 +19,7 @@ extension UIColor {
         return GradientColor(.TopToBottom, frame: UIScreen.mainScreen().bounds, colors: colors)
     }
 
-    class func defaultBackgroundColor() -> UIColor {
+    static func defaultBackgroundColor() -> UIColor {
         return UIColor.flatPowderBlueColorDark()
     }
 

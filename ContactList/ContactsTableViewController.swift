@@ -49,7 +49,11 @@ class ContactsTableViewController: UITableViewController {
         }
     }
 
-    // MARK: Private Methods
+}
+
+// MARK: Private Methods and Computed Properties
+
+private extension ContactsTableViewController {
 
     func setUpStyle() {
         tableView.backgroundColor = UIColor.defaultBackgroundColor()
@@ -154,8 +158,12 @@ class ContactsTableViewController: UITableViewController {
         }
     }
 
-    // MARK: UITableViewDataSource protocol methods
-    
+}
+
+// MARK: UITableViewDataSource protocol methods
+
+extension ContactsTableViewController {
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isSearchBarActive {
             if let filteredContacts = filteredContacts {
@@ -186,7 +194,12 @@ class ContactsTableViewController: UITableViewController {
         return cell
     }
 
-    // MARK: UITableViewDelegate protocol methods
+}
+
+
+// MARK: UITableViewDelegate protocol methods
+
+extension ContactsTableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectedIndexPath = indexPath
@@ -205,7 +218,11 @@ class ContactsTableViewController: UITableViewController {
         }
     }
 
-    // MARK: Segues
+}
+
+// MARK: Segues
+
+extension ContactsTableViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == SegueIdentifiers.ContactsToContactDetailSegue.rawValue {
