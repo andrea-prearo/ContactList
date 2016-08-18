@@ -33,7 +33,7 @@ class ContactsTableViewController: UITableViewController {
         Contact.getAll { [weak self] (success, contacts, error) -> () in
             if !success {
                 dispatch_async(dispatch_get_main_queue()) {
-                    let title = "Error"
+                    let title = NSLocalizedString("Error", comment: "Error")
                     if let error = error {
                         self?.showError(title, message: error.localizedDescription)
                     } else {

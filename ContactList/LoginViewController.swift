@@ -33,11 +33,11 @@ class LoginViewController: UIViewController {
         WebService.ping { [weak self] (success, error) -> () in
             if !success {
                 dispatch_async(dispatch_get_main_queue()) {
-                    let title = "Server Error"
+                    let title = NSLocalizedString("Server Error", comment: "Server Error")
                     if let error = error {
                         self?.showError(title, message: error.localizedDescription)
                     } else {
-                        self?.showError(title, message:  NSLocalizedString("Connection failed.", comment: "Connection failed."))
+                        self?.showError(title, message: NSLocalizedString("Connection failed.", comment: "Connection failed."))
                     }
                 }
             }
@@ -74,7 +74,7 @@ private extension LoginViewController {
             let completionBlock: WebServiceAuthCompletionBlock = {
                 [weak self] (success, token, error) -> () in
                 SVProgressHUD.dismiss()
-                let title = "Authentication Error"
+                let title = NSLocalizedString("Authentication Error", comment: "Authentication Error")
                 if let token = token where success {
                     guard let account = AuthorizedUser.init(email: username, password: password, token: token) else {
                         dispatch_async(dispatch_get_main_queue()) {
