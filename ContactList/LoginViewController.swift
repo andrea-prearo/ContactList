@@ -33,11 +33,12 @@ class LoginViewController: UIViewController {
         WebService.ping { [weak self] (success, error) -> () in
             if !success {
                 dispatch_async(dispatch_get_main_queue()) {
+                    guard let strongSelf = self else { return }
                     let title = NSLocalizedString("Server Error", comment: "Server Error")
                     if let error = error {
-                        self?.showError(title, message: error.localizedDescription)
+                        strongSelf.showError(title, message: error.localizedDescription)
                     } else {
-                        self?.showError(title, message: NSLocalizedString("Connection failed.", comment: "Connection failed."))
+                        strongSelf.showError(title, message: NSLocalizedString("Connection failed.", comment: "Connection failed."))
                     }
                 }
             }
@@ -75,10 +76,11 @@ private extension LoginViewController {
                 [weak self] (success, token, error) -> () in
                 SVProgressHUD.dismiss()
                 let title = NSLocalizedString("Authentication Error", comment: "Authentication Error")
+                guard let strongSelf = self else { return }
                 if let token = token where success {
                     guard let account = AuthorizedUser.init(email: username, password: password, token: token) else {
                         dispatch_async(dispatch_get_main_queue()) {
-                            self?.showError(title, message: NSLocalizedString("Invalid authorization.", comment: "Invalid authorization."))
+                            strongSelf.showError(title, message: NSLocalizedString("Invalid authorization.", comment: "Invalid authorization."))
                         }
                         return
                     }
@@ -86,13 +88,13 @@ private extension LoginViewController {
                     let _ = try? account.createInSecureStore()
                     let _ = try? Locksmith.deleteDataForUserAccount(AuthorizedUser.StoreKey)
                     let _ = try? Locksmith.saveData(account.data, forUserAccount: AuthorizedUser.StoreKey)
-                    self?.performSegueWithIdentifier(SegueIdentifiers.AuthToContactsSegue.rawValue, sender: self)
+                    strongSelf.performSegueWithIdentifier(SegueIdentifiers.AuthToContactsSegue.rawValue, sender: self)
                 } else {
                     dispatch_async(dispatch_get_main_queue()) {
                         if let error = error {
-                            self?.showError(title, message: error.localizedDescription)
+                            strongSelf.showError(title, message: error.localizedDescription)
                         } else {
-                            self?.showError(title, message: NSLocalizedString("Authentication failed.", comment: "Authentication failed."))
+                            strongSelf.showError(title, message: NSLocalizedString("Authentication failed.", comment: "Authentication failed."))
                         }
                     }
                 }

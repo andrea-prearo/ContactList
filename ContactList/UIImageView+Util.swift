@@ -21,15 +21,16 @@ extension UIImageView {
             return
         }
         NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: { [weak self] (data, response, error) -> Void in
+            guard let strongSelf = self else { return }
             guard let httpURLResponse = response as? NSHTTPURLResponse where httpURLResponse.statusCode == 200,
                 let mimeType = response?.MIMEType where mimeType.hasPrefix("image"),
                 let data = data where error == nil,
                 let image = UIImage(data: data)
             else {
-                self?.setRoundedImage(defaultImage)
+                strongSelf.setRoundedImage(defaultImage)
                 return
             }
-            self?.setRoundedImage(image)
+            strongSelf.setRoundedImage(image)
         }).resume()
     }
 
@@ -42,10 +43,9 @@ private extension UIImageView {
             return
         }
         dispatch_async(dispatch_get_main_queue()) { [weak self] () -> Void in
-            self?.image = image
-            if let width = self?.frame.size.width {
-                self?.roundedImage(width * CGFloat(0.5))
-            }
+            guard let strongSelf = self else { return }
+            strongSelf.image = image
+            strongSelf.roundedImage(strongSelf.frame.size.width * CGFloat(0.5))
         }
     }
 

@@ -31,20 +31,22 @@ class ContactsTableViewController: UITableViewController {
         setupSearchBar()
 
         Contact.getAll { [weak self] (success, contacts, error) -> () in
+            guard let strongSelf = self else { return }
             if !success {
                 dispatch_async(dispatch_get_main_queue()) {
                     let title = NSLocalizedString("Error", comment: "Error")
                     if let error = error {
-                        self?.showError(title, message: error.localizedDescription)
+                        strongSelf.showError(title, message: error.localizedDescription)
                     } else {
-                        self?.showError(title, message: NSLocalizedString("Can't retrieve contacts.", comment: "Can't retrieve contacts."))
+                        strongSelf.showError(title, message: NSLocalizedString("Can't retrieve contacts.", comment: "Can't retrieve contacts."))
                     }
                 }
             } else {
-                guard let strongSelf = self else { return }
                 strongSelf.contacts = contacts
                 strongSelf.contactViewModels = strongSelf.cacheContacts(contacts)
-                strongSelf.tableView.reloadData()
+                dispatch_async(dispatch_get_main_queue()) {
+                    strongSelf.tableView.reloadData()
+                }
             }
         }
     }
@@ -74,7 +76,7 @@ private extension ContactsTableViewController {
 
     func cacheContacts(contacts: [Contact?]?) -> [ContactViewModel?] {
         guard let contacts = contacts else { return [] }
-        let contactViewModels:[ContactViewModel?] = contacts.map { contact in
+        let contactViewModels: [ContactViewModel?] = contacts.map { contact in
             if let contact = contact {
                 return ContactViewModel(contact: contact)
             } else {
