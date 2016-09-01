@@ -11,6 +11,10 @@ import CoreGraphics
 
 extension UIImage {
 
+    static func defaultAvatarImage() -> UIImage? {
+        return UIImage(named: "Avatar")
+    }
+
     static func imageWithColor(colour: UIColor) -> UIImage {
         let rect = CGRectMake(0, 0, 1, 1)
         

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class ContactDetailViewController: UIViewController {
 
@@ -58,8 +59,11 @@ private extension ContactDetailViewController {
 
         let viewModel = ContactDetailViewModel(contact: contact)
 
-        if let url = viewModel.avatarUrl {
-            avatar.downloadImageFromUrl(url)
+        if let urlString = viewModel.avatarUrl, url = NSURL(string: urlString) {
+            let filter = RoundedCornersFilter(radius: avatar.frame.size.width * 0.5)
+            avatar.af_setImageWithURL(url,
+                                      placeholderImage: UIImage.defaultAvatarImage(),
+                                      filter: filter)
         }
         username.text = viewModel.username
         company.text = viewModel.company

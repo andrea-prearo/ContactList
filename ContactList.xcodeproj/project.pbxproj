@@ -26,7 +26,6 @@
 		AF902A301CA5CED6009FB1D5 /* UIImage+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF902A2F1CA5CED6009FB1D5 /* UIImage+Util.swift */; };
 		AF95ADDE1C910A7B003817AE /* ErrorCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF95ADDD1C910A7B003817AE /* ErrorCodes.swift */; };
 		AF95ADE11C9125E4003817AE /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF95ADE01C9125E4003817AE /* ContactCell.swift */; };
-		AF95ADE31C912B36003817AE /* UIImageView+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF95ADE21C912B36003817AE /* UIImageView+Util.swift */; };
 		AF95ADE51C9130DD003817AE /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF95ADE41C9130DD003817AE /* String+Util.swift */; };
 		AFADE9DF1C8CD41D008B614F /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFADE9DE1C8CD41D008B614F /* Auth.swift */; };
 		AFADE9E31C8CE074008B614F /* SegueIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFADE9E21C8CE074008B614F /* SegueIdentifiers.swift */; };
@@ -61,7 +60,6 @@
 		AF902A2F1CA5CED6009FB1D5 /* UIImage+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Util.swift"; sourceTree = "<group>"; };
 		AF95ADDD1C910A7B003817AE /* ErrorCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCodes.swift; sourceTree = "<group>"; };
 		AF95ADE01C9125E4003817AE /* ContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
-		AF95ADE21C912B36003817AE /* UIImageView+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Util.swift"; sourceTree = "<group>"; };
 		AF95ADE41C9130DD003817AE /* String+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Util.swift"; sourceTree = "<group>"; };
 		AFADE9DE1C8CD41D008B614F /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		AFADE9E21C8CE074008B614F /* SegueIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueIdentifiers.swift; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 			isa = PBXGroup;
 			children = (
 				AFADE9E91C8CF196008B614F /* UIViewController+Util.swift */,
-				AF95ADE21C912B36003817AE /* UIImageView+Util.swift */,
 				AF95ADE41C9130DD003817AE /* String+Util.swift */,
 				AF591DC11CA4C4E60019131E /* UINavigationBar+Style.swift */,
 				AF902A2D1CA5B633009FB1D5 /* UIColor+Style.swift */,
@@ -226,12 +223,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AFEA5B151C8B53900066768B /* Build configuration list for PBXNativeTarget "ContactList" */;
 			buildPhases = (
-				E3E59721EC010037AC8AE480 /* Check Pods Manifest.lock */,
+				E3E59721EC010037AC8AE480 /* 📦 Check Pods Manifest.lock */,
 				AFEA5AFF1C8B53900066768B /* Sources */,
 				AFEA5B001C8B53900066768B /* Frameworks */,
 				AFEA5B011C8B53900066768B /* Resources */,
-				4E811DD2F9C0D3B91E40D891 /* Embed Pods Frameworks */,
-				0E0D8AE114226D7A790A262E /* Copy Pods Resources */,
+				4E811DD2F9C0D3B91E40D891 /* 📦 Embed Pods Frameworks */,
+				0E0D8AE114226D7A790A262E /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -291,14 +288,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0E0D8AE114226D7A790A262E /* Copy Pods Resources */ = {
+		0E0D8AE114226D7A790A262E /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,14 +303,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ContactList/Pods-ContactList-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4E811DD2F9C0D3B91E40D891 /* Embed Pods Frameworks */ = {
+		4E811DD2F9C0D3B91E40D891 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,14 +318,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ContactList/Pods-ContactList-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E3E59721EC010037AC8AE480 /* Check Pods Manifest.lock */ = {
+		E3E59721EC010037AC8AE480 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -355,7 +352,6 @@
 				AF04A9041C9E521B00F2035B /* Email.swift in Sources */,
 				AF04EFC61C9DEBAD0037351E /* ContactDetailViewController.swift in Sources */,
 				AFADE9EA1C8CF196008B614F /* UIViewController+Util.swift in Sources */,
-				AF95ADE31C912B36003817AE /* UIImageView+Util.swift in Sources */,
 				AF95ADE11C9125E4003817AE /* ContactCell.swift in Sources */,
 				AF902A2E1CA5B633009FB1D5 /* UIColor+Style.swift in Sources */,
 				AFEA5B071C8B53900066768B /* AppDelegate.swift in Sources */,
