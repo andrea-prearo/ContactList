@@ -10,7 +10,7 @@ import Foundation
 
 extension String {
 
-    static func emptyForNilOptional(optionalString: String?) -> String {
+    static func emptyForNilOptional(_ optionalString: String?) -> String {
         let string: String
         if let unwrapped = optionalString {
             string = unwrapped
@@ -20,9 +20,9 @@ extension String {
         return string
     }
 
-    static func caseInsensitiveContains(optionalString: String?, searchText: String) -> Bool {
+    static func caseInsensitiveContains(_ optionalString: String?, searchText: String) -> Bool {
         guard let sourceString = optionalString else { return false }
-        return sourceString.lowercaseString.containsString(searchText.lowercaseString)
+        return sourceString.lowercased().contains(searchText.lowercased())
     }
     
 }

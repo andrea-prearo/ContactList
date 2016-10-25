@@ -11,9 +11,9 @@ import UIKit
 extension UINavigationController {
 
     func defaultNavigationBarStyle() {
-        let image = UINavigationBar.appearance().backgroundImageForBarMetrics(UIBarMetrics.Default)
-        navigationBar.setBackgroundImage(image, forBarMetrics:UIBarMetrics.Default)
-        navigationBar.translucent = UINavigationBar.appearance().translucent
+        let image = UINavigationBar.appearance().backgroundImage(for: UIBarMetrics.default)
+        navigationBar.setBackgroundImage(image, for:UIBarMetrics.default)
+        navigationBar.isTranslucent = UINavigationBar.appearance().isTranslucent
         navigationBar.shadowImage = UINavigationBar.appearance().shadowImage
         navigationBar.tintColor = UINavigationBar.appearance().tintColor
         view.backgroundColor = UINavigationBar.appearance().backgroundColor
@@ -21,18 +21,18 @@ extension UINavigationController {
     }
 
     func transparentNavigationBarStyle() {
-        navigationBar.setBackgroundImage(UIImage(), forBarMetrics:UIBarMetrics.Default)
-        navigationBar.translucent = true
+        navigationBar.setBackgroundImage(UIImage(), for:UIBarMetrics.default)
+        navigationBar.isTranslucent = true
         navigationBar.shadowImage = UIImage()
-        navigationBar.tintColor = UIColor.whiteColor()
-        view.backgroundColor = UIColor.clearColor()
+        navigationBar.tintColor = UIColor.white
+        view.backgroundColor = UIColor.clear
     }
     
     func semiTransparentNavigationBarStyle() {
         let image = UIImage.imageWithColor(UIColor.defaultBackgroundColor())
-        navigationBar.setBackgroundImage(image, forBarMetrics:UIBarMetrics.Default)
-        navigationBar.tintColor = UIColor.whiteColor()
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        navigationBar.setBackgroundImage(image, for:UIBarMetrics.default)
+        navigationBar.tintColor = UIColor.white
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
     }
 
 }

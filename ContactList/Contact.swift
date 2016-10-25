@@ -37,7 +37,7 @@ struct Contact {
         self.location = location
     }
     
-    static func getAll(completionBlock: (success: Bool, contacts: [Contact?]?, error: NSError?) -> ()) {
+    static func getAll(_ completionBlock: @escaping (_ success: Bool, _ contacts: [Contact?]?, _ error: NSError?) -> ()) {
         let account = AuthorizedUser.loadFromStore()
         if account.isFailure {
             completionBlock(success: false, contacts: nil, error: account.error)
@@ -45,7 +45,7 @@ struct Contact {
         }
 
         guard let token = account.value?.token else {
-            completionBlock(success: false, contacts: nil, error: ErrorCodes.InvalidToken())
+            completionBlock(false, nil, ErrorCodes.InvalidToken())
             return
         }
 
@@ -91,8 +91,8 @@ extension Contact: JSONDecodable {
 
     var address: String {
         if let firstLocation = location?.first,
-            location = firstLocation,
-            data = location.data {
+            let location = firstLocation,
+            let data = location.data {
             let city = String.emptyForNilOptional(data.city)
             let state = String.emptyForNilOptional(data.state)
             return "\(city), \(state)"
@@ -101,7 +101,7 @@ extension Contact: JSONDecodable {
         }
     }
     
-    static func decode(json: JSON) -> Contact? {
+    static func decode(_ json: JSON) -> Contact? {
         return Contact(
             avatar: json <| "avatar",
             firstName: json <| "firstName",

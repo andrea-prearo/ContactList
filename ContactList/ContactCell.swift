@@ -15,8 +15,8 @@ class ContactCell: UITableViewCell {
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var company: UILabel!
 
-    func configure(viewModel: ContactViewModel) {
-        if let urlString = viewModel.avatarUrl, url = NSURL(string: urlString) {
+    func configure(_ viewModel: ContactViewModel) {
+        if let urlString = viewModel.avatarUrl, let url = URL(string: urlString) {
             let filter = RoundedCornersFilter(radius: avatar.frame.size.width * 0.5)
             avatar.af_setImageWithURL(url,
                                       placeholderImage: UIImage.defaultAvatarImage(),

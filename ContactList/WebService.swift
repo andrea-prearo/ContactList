@@ -11,18 +11,20 @@ import Alamofire
 
 class WebServiceConstants {
 
-    private static var token: dispatch_once_t = 0
-    private static var dictionary: NSDictionary?
-
-    class var APIEnvironments: NSDictionary? {
-        dispatch_once(&token) { () -> Void in
-            if let plistpath = NSBundle.mainBundle().pathForResource("APIEnvironments", ofType: "plist"),
-                plist = NSDictionary(contentsOfFile: plistpath) {
+    private static var __once: () = { () -> Void in
+            if let plistpath = Bundle.main.path(forResource: "APIEnvironments", ofType: "plist"),
+                let plist = NSDictionary(contentsOfFile: plistpath) {
                 dictionary = plist
             } else {
                 dictionary = nil
             }
-        }
+        }()
+
+    fileprivate static var token: Int = 0
+    fileprivate static var dictionary: NSDictionary?
+
+    class var APIEnvironments: NSDictionary? {
+        _ = WebServiceConstants.__once
         return dictionary
     }
     
@@ -32,9 +34,9 @@ class WebServiceConstants {
     // Host
     class var HostAddress: String {
         if let environments = WebServiceConstants.APIEnvironments,
-            selectedEnvironment = NSUserDefaults.standardUserDefaults().stringForKey("environment"),
-            environmentDict = environments[selectedEnvironment] as? [String:String],
-            environment = environmentDict["HostAddress"] {
+            let selectedEnvironment = UserDefaults.standard.string(forKey: "environment"),
+            let environmentDict = environments[selectedEnvironment] as? [String:String],
+            let environment = environmentDict["HostAddress"] {
             return environment
         }
         return "http://hidden-garden-53580.herokuapp.com"
@@ -52,11 +54,11 @@ class WebServiceConstants {
 class WebService {
     
     // Use custom error message instead of the default one provided by Alamofire's validate()
-    static func verifyAuthenticationErrors(response: AuthResponse) -> NSError? {
+    static func verifyAuthenticationErrors(_ response: AuthResponse) -> NSError? {
         if let urlResponse = response.response,
-            jsonResponse = response.result.value as? [String: AnyObject],
-            message = jsonResponse["message"] {
-                let authErrorCodes: Range<Int> = 400..<500
+            let jsonResponse = response.result.value as? [String: AnyObject],
+            let message = jsonResponse["message"] {
+                let authErrorCodes: CountableRange<Int> = 400..<500
                 if authErrorCodes.contains(urlResponse.statusCode) {
                     let userInfo = [ NSLocalizedDescriptionKey: message ]
                     return NSError.init(domain: "com.aprearo.ContactList", code: urlResponse.statusCode, userInfo: userInfo)
@@ -65,7 +67,7 @@ class WebService {
         return nil
     }
     
-    static func ping(completionBlock: (success: Bool, error: NSError?) -> ()) {
+    static func ping(_ completionBlock: @escaping (_ success: Bool, _ error: NSError?) -> ()) {
         Alamofire.request(
             .GET,
             WebServiceConstants.HostAddress)

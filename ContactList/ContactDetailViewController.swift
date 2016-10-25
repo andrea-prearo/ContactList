@@ -31,9 +31,9 @@ class ContactDetailViewController: UIViewController {
     }
 
     override func viewWillLayoutSubviews() {
-        scrollView.contentOffset = CGPointMake(0, 0)
-        let screenSize = UIScreen.mainScreen().bounds
-        scrollView.contentSize = CGSizeMake(screenSize.width, screenSize.height + 1)
+        scrollView.contentOffset = CGPoint(x: 0, y: 0)
+        let screenSize = UIScreen.main.bounds
+        scrollView.contentSize = CGSize(width: screenSize.width, height: screenSize.height + 1)
     }
 
     func setUpStyle() {
@@ -59,7 +59,7 @@ private extension ContactDetailViewController {
 
         let viewModel = ContactDetailViewModel(contact: contact)
 
-        if let urlString = viewModel.avatarUrl, url = NSURL(string: urlString) {
+        if let urlString = viewModel.avatarUrl, let url = URL(string: urlString) {
             let filter = RoundedCornersFilter(radius: avatar.frame.size.width * 0.5)
             avatar.af_setImageWithURL(url,
                                       placeholderImage: UIImage.defaultAvatarImage(),

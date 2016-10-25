@@ -24,7 +24,7 @@ struct Phone {
 
 extension Phone: JSONDecodable {
     
-    static func decode(json: JSON) -> Phone? {
+    static func decode(_ json: JSON) -> Phone? {
         return Phone(
             label: json <| "label",
             number: json <| "number")

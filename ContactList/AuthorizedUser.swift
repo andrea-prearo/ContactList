@@ -45,7 +45,7 @@ class AuthorizedUser: ReadableSecureStorable, CreateableSecureStorable, Deleteab
         } else {
             token = ""
         }
-        return [ "email": email, "password": password, "token": token ]
+        return [ "email": email as AnyObject, "password": password as AnyObject, "token": token as AnyObject ]
     }
 
     // MARK: GenericPasswordSecureStorable protocol methods
@@ -63,7 +63,7 @@ class AuthorizedUser: ReadableSecureStorable, CreateableSecureStorable, Deleteab
 
 extension AuthorizedUser {
     
-    static func decode(json: [String: AnyObject]) -> AuthorizedUser? {
+    static func decode(_ json: [String: AnyObject]) -> AuthorizedUser? {
         let email = json["email"] as? String
         let password = json["password"] as? String
         let token = json["token"] as? String
@@ -72,7 +72,7 @@ extension AuthorizedUser {
 
     static func loadFromStore() -> Result<AuthorizedUser, NSError>  {
         if let accountData = Locksmith.loadDataForUserAccount(AuthorizedUser.StoreKey),
-            account = AuthorizedUser.decode(accountData) {
+            let account = AuthorizedUser.decode(accountData) {
             return .Success(account)
         }
 

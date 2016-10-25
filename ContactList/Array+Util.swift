@@ -39,9 +39,9 @@ extension Array where Element: OptionalType {
 
 extension Array {
     
-    func dropAtIndex(index: Int) -> [Element] {
+    func dropAtIndex(_ index: Int) -> [Element] {
         var copy = self
-        copy.removeAtIndex(index)
+        copy.remove(at: index)
         return copy
     }
     
@@ -49,7 +49,7 @@ extension Array {
 
 extension Array where Element: Equatable {
     
-    func drop(element: Element) -> [Element] {
+    func drop(_ element: Element) -> [Element] {
         return filter({ $0 != element })
     }
     

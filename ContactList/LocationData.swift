@@ -33,7 +33,7 @@ struct LocationData {
 
 extension LocationData: JSONDecodable {
     
-    static func decode(json: JSON) -> LocationData? {
+    static func decode(_ json: JSON) -> LocationData? {
         return LocationData(
             address: json <| "address",
             city: json <| "city",

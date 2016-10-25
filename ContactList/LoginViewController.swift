@@ -11,11 +11,11 @@ import Alamofire
 import Locksmith
 import SVProgressHUD
 
-typealias CompletionBlock = (Response<AnyObject, NSError> -> ())
+typealias CompletionBlock = ((Response<AnyObject, NSError>) -> ())
 
 enum LoginViewControllerSegmentIndex: Int {
-    case LogIn = 0
-    case SignUp = 1
+    case logIn = 0
+    case signUp = 1
 }
 
 class LoginViewController: UIViewController {
@@ -30,9 +30,13 @@ class LoginViewController: UIViewController {
 
         setUpStyle()
 
+        // Debug
+        usernameTextField.text = "user001@hidden-garden-53580.com"
+        passwordTextField.text = "user001-1234"
+        
         WebService.ping { [weak self] (success, error) -> () in
             if !success {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     guard let strongSelf = self else { return }
                     let title = NSLocalizedString("Server Error", comment: "Server Error")
                     if let error = error {
@@ -57,29 +61,29 @@ private extension LoginViewController {
 
         submitButton.layer.cornerRadius = CGFloat(2.5)
         submitButton.clipsToBounds = true
-        submitButton.setBackgroundImage(UIImage.imageWithColor(UIColor.clearColor()), forState: .Normal)
+        submitButton.setBackgroundImage(UIImage.imageWithColor(UIColor.clear), for: UIControlState())
         let selectedImage = UIImage.imageWithColor(UIColor.flatWhiteColor())
         submitButton.setBackgroundImage(selectedImage, forState: .Highlighted)
         submitButton.setBackgroundImage(selectedImage, forState: .Selected)
         let titleColor = UIColor.flatBlackColorDark()
-        submitButton.setTitleColor(UIColor.flatGrayColorDark(), forState: .Normal)
+        submitButton.setTitleColor(UIColor.flatGrayColorDark(), for: .Normal)
         submitButton.setTitleColor(titleColor, forState: .Highlighted)
         submitButton.setTitleColor(titleColor, forState: .Selected)
     }
 
-    @IBAction func submitButtonTapped(sender: AnyObject) {
+    @IBAction func submitButtonTapped(_ sender: AnyObject) {
         if let username = usernameTextField.text,
             let password = passwordTextField.text
-            where !username.isEmpty && !password.isEmpty {
+            , !username.isEmpty && !password.isEmpty {
             SVProgressHUD.show()
             let completionBlock: WebServiceAuthCompletionBlock = {
                 [weak self] (success, token, error) -> () in
                 SVProgressHUD.dismiss()
                 let title = NSLocalizedString("Authentication Error", comment: "Authentication Error")
                 guard let strongSelf = self else { return }
-                if let token = token where success {
+                if let token = token , success {
                     guard let account = AuthorizedUser.init(email: username, password: password, token: token) else {
-                        dispatch_async(dispatch_get_main_queue()) {
+                        DispatchQueue.main.async {
                             strongSelf.showError(title, message: NSLocalizedString("Invalid authorization.", comment: "Invalid authorization."))
                         }
                         return
@@ -88,9 +92,9 @@ private extension LoginViewController {
                     let _ = try? account.createInSecureStore()
                     let _ = try? Locksmith.deleteDataForUserAccount(AuthorizedUser.StoreKey)
                     let _ = try? Locksmith.saveData(account.data, forUserAccount: AuthorizedUser.StoreKey)
-                    strongSelf.performSegueWithIdentifier(SegueIdentifiers.AuthToContactsSegue.rawValue, sender: self)
+                    strongSelf.performSegue(withIdentifier: SegueIdentifiers.AuthToContactsSegue.rawValue, sender: self)
                 } else {
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         if let error = error {
                             strongSelf.showError(title, message: error.localizedDescription)
                         } else {
@@ -99,19 +103,19 @@ private extension LoginViewController {
                     }
                 }
             }
-            if segmentedControl.selectedSegmentIndex == LoginViewControllerSegmentIndex.LogIn.rawValue {
+            if segmentedControl.selectedSegmentIndex == LoginViewControllerSegmentIndex.logIn.rawValue {
                 Auth.login(email: username, password: password, completionBlock: completionBlock)
-            } else if segmentedControl.selectedSegmentIndex == LoginViewControllerSegmentIndex.SignUp.rawValue {
+            } else if segmentedControl.selectedSegmentIndex == LoginViewControllerSegmentIndex.signUp.rawValue {
                 Auth.register(email: username, password: password, completionBlock: completionBlock)
             }
         } else {
             let alertController = UIAlertController(
                 title: NSLocalizedString("Input Error", comment: "Input Error"),
                 message: NSLocalizedString("Please, enter email and password", comment: "Please, enter email and password"),
-                preferredStyle: .Alert)
-            let OKAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .Default, handler: nil)
+                preferredStyle: .alert)
+            let OKAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .default, handler: nil)
             alertController.addAction(OKAction)
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 

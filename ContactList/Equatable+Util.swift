@@ -15,9 +15,9 @@ import Foundation
 
 func ==<T: Equatable>(lhs: [T]?, rhs: [T]?) -> Bool {
     switch (lhs,rhs) {
-    case (.Some(let lhs), .Some(let rhs)):
+    case (.some(let lhs), .some(let rhs)):
         return lhs == rhs
-    case (.None, .None):
+    case (.none, .none):
         return true
     default:
         return false
@@ -26,15 +26,15 @@ func ==<T: Equatable>(lhs: [T]?, rhs: [T]?) -> Bool {
 
 func ==<T: Equatable>(lhs: [T?]?, rhs: [T?]?) -> Bool {
     switch (lhs,rhs) {
-    case (.Some(let lhs), .Some(let rhs)):
+    case (.some(let lhs), .some(let rhs)):
         if let lhsNonNil = lhs.unwrap(),
-            rhsNonNil = rhs.unwrap()
-            where lhsNonNil.count == rhsNonNil.count {
+            let rhsNonNil = rhs.unwrap()
+            , lhsNonNil.count == rhsNonNil.count {
             return lhsNonNil == rhsNonNil
         } else {
             return false
         }
-    case (.None, .None):
+    case (.none, .none):
         return true
     default:
         return false

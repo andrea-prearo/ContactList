@@ -24,7 +24,7 @@ struct Location {
 
 extension Location: JSONDecodable {
     
-    static func decode(json: JSON) -> Location? {
+    static func decode(_ json: JSON) -> Location? {
         return Location(
             label: json <| "label",
             data: json <| "data" >>> LocationData.decode)

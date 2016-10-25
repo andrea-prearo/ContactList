@@ -9,16 +9,16 @@
 import Foundation
 import Alamofire
 
-typealias WebServiceAuthCompletionBlock = ((success: Bool, token: String?, error: NSError?) -> ())
+typealias WebServiceAuthCompletionBlock = ((_ success: Bool, _ token: String?, _ error: NSError?) -> ())
 typealias AuthResponse = Response<AnyObject, NSError>
 
 class Auth {
 
-    static func login(email email: String, password: String, completionBlock: WebServiceAuthCompletionBlock) {
+    static func login(email: String, password: String, completionBlock: @escaping WebServiceAuthCompletionBlock) {
         authorize(email: email, password: password, path: WebServiceConstants.LogIn, completionBlock: completionBlock)
     }
 
-    static func register(email email: String, password: String, completionBlock: WebServiceAuthCompletionBlock) {
+    static func register(email: String, password: String, completionBlock: @escaping WebServiceAuthCompletionBlock) {
         authorize(email: email, password: password, path: WebServiceConstants.SignUp, completionBlock: completionBlock)
     }
 
@@ -26,10 +26,10 @@ class Auth {
 
 private extension Auth {
 
-    static func authorize(email email: String,
+    static func authorize(email: String,
         password: String,
         path: String,
-        completionBlock: WebServiceAuthCompletionBlock) {
+        completionBlock: @escaping WebServiceAuthCompletionBlock) {
         let parameters = [
             "email": email,
             "password": password

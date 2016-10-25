@@ -17,12 +17,12 @@ class ContactsTableViewController: UITableViewController {
     static let scopeButtonTitleLastName = NSLocalizedString("Last Name", comment: "Last Name")
     static let scopeButtonTitleCompany = NSLocalizedString("Company", comment: "Company")
 
-    private var contacts: [Contact?]?
-    private var filteredContacts: [Contact?]?
-    private var contactViewModels: [ContactViewModel?] = []
-    private var filteredContactViewModels: [ContactViewModel?] = []
-    private var selectedIndexPath: NSIndexPath? = nil
-    private let searchController = UISearchController(searchResultsController: nil)
+    fileprivate var contacts: [Contact?]?
+    fileprivate var filteredContacts: [Contact?]?
+    fileprivate var contactViewModels: [ContactViewModel?] = []
+    fileprivate var filteredContactViewModels: [ContactViewModel?] = []
+    fileprivate var selectedIndexPath: IndexPath? = nil
+    fileprivate let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ class ContactsTableViewController: UITableViewController {
         Contact.getAll { [weak self] (success, contacts, error) -> () in
             guard let strongSelf = self else { return }
             if !success {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     let title = NSLocalizedString("Error", comment: "Error")
                     if let error = error {
                         strongSelf.showError(title, message: error.localizedDescription)
@@ -44,7 +44,7 @@ class ContactsTableViewController: UITableViewController {
             } else {
                 strongSelf.contacts = contacts
                 strongSelf.contactViewModels = strongSelf.cacheContacts(contacts)
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     strongSelf.tableView.reloadData()
                 }
             }
@@ -74,7 +74,7 @@ private extension ContactsTableViewController {
         tableView.tableHeaderView = searchController.searchBar
     }
 
-    func cacheContacts(contacts: [Contact?]?) -> [ContactViewModel?] {
+    func cacheContacts(_ contacts: [Contact?]?) -> [ContactViewModel?] {
         guard let contacts = contacts else { return [] }
         let contactViewModels: [ContactViewModel?] = contacts.map { contact in
             if let contact = contact {
@@ -86,11 +86,11 @@ private extension ContactsTableViewController {
         return contactViewModels
     }
     
-    func showDeleteContactAlert(contact: Contact) {
+    func showDeleteContactAlert(_ contact: Contact) {
         let formatString = NSLocalizedString("Are you sure you want to delete %@?", comment: "Are you sure you want to delete this contact?")
         let contactName: String
         if let _ = contact.firstName,
-            _ = contact.lastName {
+            let _ = contact.lastName {
             contactName = contact.fullName
         } else {
             contactName = NSLocalizedString("this contact", comment: "this contact")
@@ -98,45 +98,45 @@ private extension ContactsTableViewController {
         let message = String(format: formatString, contactName)
         let alert = UIAlertController(title: NSLocalizedString("Delete Contact", comment: "Delete Contact"),
             message: message,
-            preferredStyle: .Alert)
+            preferredStyle: .alert)
         
         let deleteActionString = NSLocalizedString("Delete", comment: "Delete")
-        let deleteAction = UIAlertAction(title: deleteActionString, style: .Destructive, handler: handleDeleteContact)
+        let deleteAction = UIAlertAction(title: deleteActionString, style: .destructive, handler: handleDeleteContact)
         let cancelActionString = NSLocalizedString("Cancel", comment: "Cancel")
-        let cancelAction = UIAlertAction(title: cancelActionString, style: .Cancel, handler: cancelDeleteContact)
+        let cancelAction = UIAlertAction(title: cancelActionString, style: .cancel, handler: cancelDeleteContact)
         
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
-    func handleDeleteContact(alertAction: UIAlertAction!) -> Void {
+    func handleDeleteContact(_ alertAction: UIAlertAction!) -> Void {
         if let indexPath = selectedIndexPath,
-            contacts = contacts {
+            let contacts = contacts {
             tableView.beginUpdates()
 
-            var row = indexPath.row
+            var row = (indexPath as NSIndexPath).row
             if let filteredContacts = filteredContacts
-                where isSearchBarActive {
+                , isSearchBarActive {
                 self.filteredContacts = filteredContacts.dropAtIndex(row)
                 filteredContactViewModels = cacheContacts(self.filteredContacts)
-                row = contacts.indexOf({ $0 == filteredContacts[row] }) ?? row
+                row = contacts.index(where: { $0 == filteredContacts[row] }) ?? row
             }
             self.contacts = contacts.dropAtIndex(row)
             contactViewModels = cacheContacts(self.contacts)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
             selectedIndexPath = nil
             
             tableView.endUpdates()
         }
     }
     
-    func cancelDeleteContact(alertAction: UIAlertAction!) {
+    func cancelDeleteContact(_ alertAction: UIAlertAction!) {
         selectedIndexPath = nil
     }
 
-    func filterContacts(searchText: String, scope: String) {
+    func filterContacts(_ searchText: String, scope: String) {
         filteredContacts = contacts?.filter({ contact -> Bool in
             guard let contact = contact else { return false }
             if scope == ContactsTableViewController.scopeButtonTitleDefault {
@@ -156,7 +156,7 @@ private extension ContactsTableViewController {
 
     var isSearchBarActive: Bool {
         get {
-            return searchController.active && searchController.searchBar.text?.isEmpty == false
+            return searchController.isActive && searchController.searchBar.text?.isEmpty == false
         }
     }
 
@@ -166,7 +166,7 @@ private extension ContactsTableViewController {
 
 extension ContactsTableViewController {
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isSearchBarActive {
             if let filteredContacts = filteredContacts {
                 return filteredContacts.count
@@ -181,13 +181,13 @@ extension ContactsTableViewController {
         }
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(ContactCellId, forIndexPath: indexPath) as! ContactCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ContactCellId, for: indexPath) as! ContactCell
         let contactViewModel: ContactViewModel?
         if isSearchBarActive {
-            contactViewModel = filteredContactViewModels[indexPath.row]
+            contactViewModel = filteredContactViewModels[(indexPath as NSIndexPath).row]
         } else {
-            contactViewModel = contactViewModels[indexPath.row]
+            contactViewModel = contactViewModels[(indexPath as NSIndexPath).row]
         }
         
         if let viewModel = contactViewModel {
@@ -203,16 +203,16 @@ extension ContactsTableViewController {
 
 extension ContactsTableViewController {
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
-        performSegueWithIdentifier(SegueIdentifiers.ContactsToContactDetailSegue.rawValue, sender: self)
+        performSegue(withIdentifier: SegueIdentifiers.ContactsToContactDetailSegue.rawValue, sender: self)
     }
 
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             selectedIndexPath = indexPath
             guard let contacts = contacts,
-                contact = contacts[indexPath.row]
+                let contact = contacts[(indexPath as NSIndexPath).row]
             else {
                 return
             }
@@ -226,17 +226,17 @@ extension ContactsTableViewController {
 
 extension ContactsTableViewController {
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueIdentifiers.ContactsToContactDetailSegue.rawValue {
-            guard let destinationViewController = segue.destinationViewController as? ContactDetailViewController else { return }
+            guard let destinationViewController = segue.destination as? ContactDetailViewController else { return }
             guard let selectedIndexPath = selectedIndexPath else { return }
 
             let contact: Contact?
             if let filteredContacts = filteredContacts
-                where isSearchBarActive {
-                contact = filteredContacts[selectedIndexPath.row]
+                , isSearchBarActive {
+                contact = filteredContacts[(selectedIndexPath as NSIndexPath).row]
             } else if let contacts = contacts {
-                contact = contacts[selectedIndexPath.row]
+                contact = contacts[(selectedIndexPath as NSIndexPath).row]
             } else {
                 return
             }
@@ -254,7 +254,7 @@ extension ContactsTableViewController {
 
 extension ContactsTableViewController: UISearchBarDelegate {
 
-    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContacts(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 
@@ -264,7 +264,7 @@ extension ContactsTableViewController: UISearchBarDelegate {
 
 extension ContactsTableViewController: UISearchResultsUpdating {
 
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
         filterContacts(searchController.searchBar.text!, scope: scope)

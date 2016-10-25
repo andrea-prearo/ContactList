@@ -24,7 +24,7 @@ struct Email {
 
 extension Email: JSONDecodable {
     
-    static func decode(json: JSON) -> Email? {
+    static func decode(_ json: JSON) -> Email? {
         return Email(
             label: json <| "label",
             address: json <| "address")
