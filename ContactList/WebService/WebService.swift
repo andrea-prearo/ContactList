@@ -12,13 +12,13 @@ import Alamofire
 class WebServiceConstants {
 
     private static var __once: () = { () -> Void in
-            if let plistpath = Bundle.main.path(forResource: "APIEnvironments", ofType: "plist"),
-                let plist = NSDictionary(contentsOfFile: plistpath) {
-                dictionary = plist
-            } else {
-                dictionary = nil
-            }
-        }()
+        if let plistpath = Bundle.main.path(forResource: "APIEnvironments", ofType: "plist"),
+            let plist = NSDictionary(contentsOfFile: plistpath) {
+            dictionary = plist
+        } else {
+            dictionary = nil
+        }
+    }()
 
     fileprivate static var token: Int = 0
     fileprivate static var dictionary: NSDictionary?
