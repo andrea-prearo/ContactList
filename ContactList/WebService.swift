@@ -54,7 +54,7 @@ class WebServiceConstants {
 class WebService {
     
     // Use custom error message instead of the default one provided by Alamofire's validate()
-    static func verifyAuthenticationErrors(_ response: AuthResponse) -> NSError? {
+    static func verifyAuthenticationErrors(_ response: AuthResponse) -> Error? {
         if let urlResponse = response.response,
             let jsonResponse = response.result.value as? [String: AnyObject],
             let message = jsonResponse["message"] {
@@ -67,35 +67,33 @@ class WebService {
         return nil
     }
     
-    static func ping(_ completionBlock: @escaping (_ success: Bool, _ error: NSError?) -> ()) {
-        Alamofire.request(
-            .GET,
-            WebServiceConstants.HostAddress)
+    static func ping(_ completionBlock: @escaping (_ success: Bool, _ error: Error?) -> ()) {
+        Alamofire.request(WebServiceConstants.HostAddress)
         .responseJSON { response in
             guard response.result.isSuccess else {
                 if let error = response.result.error {
-                    completionBlock(success: false, error: error)
+                    completionBlock(false, error)
                 } else {
-                    completionBlock(success: false, error: nil)
+                    completionBlock(false, nil)
                 }
                 return
             }
             
             guard let jsonResponse = response.result.value as? [String: AnyObject] else {
-                completionBlock(success: false, error: nil)
+                completionBlock(false, nil)
                 return
             }
             
             guard let success = jsonResponse["success"] as? Bool else {
-                completionBlock(success: false, error: nil)
+                completionBlock(false, nil)
                 return
             }
             
             if !success {
-                completionBlock(success: false, error: nil)
+                completionBlock(false, nil)
             }
 
-            completionBlock(success: true, error: nil)
+            completionBlock(true, nil)
         }
     }
     

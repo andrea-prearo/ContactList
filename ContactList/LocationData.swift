@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import LiteJSONConvertible
+import Marshal
 
 struct LocationData {
     
@@ -31,15 +31,14 @@ struct LocationData {
     
 }
 
-extension LocationData: JSONDecodable {
+extension LocationData: Unmarshaling {
     
-    static func decode(_ json: JSON) -> LocationData? {
-        return LocationData(
-            address: json <| "address",
-            city: json <| "city",
-            state: json <| "state",
-            country: json <| "country",
-            zipCode: json <| "zipCode")
+    init(object: MarshaledObject) {
+        address = try? object.value(for: "address")
+        city = try? object.value(for: "city")
+        state = try? object.value(for: "state")
+        country = try? object.value(for: "country")
+        zipCode = try? object.value(for: "zipCode")
     }
     
 }

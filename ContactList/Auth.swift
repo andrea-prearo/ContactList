@@ -9,8 +9,8 @@
 import Foundation
 import Alamofire
 
-typealias WebServiceAuthCompletionBlock = ((_ success: Bool, _ token: String?, _ error: NSError?) -> ())
-typealias AuthResponse = Response<AnyObject, NSError>
+typealias WebServiceAuthCompletionBlock = ((_ success: Bool, _ token: String?, _ error: Error?) -> ())
+typealias AuthResponse = DataResponse<Any>
 
 class Auth {
 
@@ -36,36 +36,36 @@ private extension Auth {
         ]
         
         Alamofire.request(
-            .POST,
             path,
+            method: .post,
             parameters: parameters,
-            encoding: .JSON)
+            encoding: JSONEncoding.default)
             .responseJSON { response in
                 if let error = WebService.verifyAuthenticationErrors(response) {
-                    completionBlock(success: false, token: nil, error: error)
+                    completionBlock(false, nil, error)
                     return
                 }
                 
                 guard response.result.isSuccess else {
                     if let error = response.result.error {
-                        completionBlock(success: false, token: nil, error: error)
+                        completionBlock(false, nil, error)
                     } else {
-                        completionBlock(success: false, token: nil, error: nil)
+                        completionBlock(false, nil, nil)
                     }
                     return
                 }
                 
                 guard let jsonResponse = response.result.value as? [String: AnyObject] else {
-                    completionBlock(success: false, token: nil, error: nil)
+                    completionBlock(false, nil, nil)
                     return
                 }
                 
                 guard let token = jsonResponse["token"] as? String else {
-                    completionBlock(success: false, token: nil, error: nil)
+                    completionBlock(false, nil, nil)
                     return
                 }
                 
-                completionBlock(success: true, token: token, error: nil)
+                completionBlock(true, token, nil)
         }
     }
     

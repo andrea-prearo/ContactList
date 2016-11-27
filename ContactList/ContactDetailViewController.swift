@@ -61,9 +61,9 @@ private extension ContactDetailViewController {
 
         if let urlString = viewModel.avatarUrl, let url = URL(string: urlString) {
             let filter = RoundedCornersFilter(radius: avatar.frame.size.width * 0.5)
-            avatar.af_setImageWithURL(url,
-                                      placeholderImage: UIImage.defaultAvatarImage(),
-                                      filter: filter)
+            avatar.af_setImage(withURL: url,
+                               placeholderImage: UIImage.defaultAvatarImage(),
+                               filter: filter)
         }
         username.text = viewModel.username
         company.text = viewModel.company

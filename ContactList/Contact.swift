@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 import Locksmith
-import LiteJSONConvertible
+import Marshal
 
 struct Contact {
     
@@ -17,17 +17,17 @@ struct Contact {
     let firstName: String?
     let lastName: String?
     let company: String?
-    let phone: [Phone?]?
-    let email: [Email?]?
-    let location: [Location?]?
+    let phone: [Phone]?
+    let email: [Email]?
+    let location: [Location]?
     
     init(avatar: String?,
         firstName: String?,
         lastName: String?,
         company: String?,
-        phone: [Phone?]?,
-        email: [Email?]?,
-        location: [Location?]?) {
+        phone: [Phone]?,
+        email: [Email]?,
+        location: [Location]?) {
         self.avatar = avatar
         self.firstName = firstName
         self.lastName = lastName
@@ -37,10 +37,10 @@ struct Contact {
         self.location = location
     }
     
-    static func getAll(_ completionBlock: @escaping (_ success: Bool, _ contacts: [Contact?]?, _ error: NSError?) -> ()) {
+    static func getAll(_ completionBlock: @escaping (_ success: Bool, _ contacts: [Contact?]?, _ error: Error?) -> ()) {
         let account = AuthorizedUser.loadFromStore()
         if account.isFailure {
-            completionBlock(success: false, contacts: nil, error: account.error)
+            completionBlock(false, nil, account.error)
             return
         }
 
@@ -50,38 +50,36 @@ struct Contact {
         }
 
         Alamofire.request(
-            .GET,
             WebServiceConstants.Contacts,
             headers: [WebServiceConstants.TokenHeader: token])
         .responseJSON { response in
             if let error = WebService.verifyAuthenticationErrors(response) {
-                completionBlock(success: false, contacts: nil, error: error)
+                completionBlock(false, nil, error)
                 return
             }
             
             guard response.result.isSuccess else {
                 if let error = response.result.error {
-                    completionBlock(success: false, contacts: nil, error: error)
+                    completionBlock(false, nil, error)
                 } else {
-                    completionBlock(success: false, contacts: nil, error: nil)
+                    completionBlock(false, nil, nil)
                 }
                 return
             }
 
-            guard let jsonResponse = response.result.value as? [JSON] else {
-                completionBlock(success: false, contacts: nil, error: nil)
+            guard let json = response.result.value as? [String: Any] else {
+                completionBlock(false, nil, nil)
                 return
             }
 
-            let contacts = jsonResponse.map(Contact.decode)
-
-            completionBlock(success: true, contacts: contacts, error: nil)
+            let contacts: [Contact]? = try? json.value(for: "contacts")
+            completionBlock(true, contacts, nil)
         }
     }
     
 }
 
-extension Contact: JSONDecodable {
+extension Contact: Unmarshaling {
 
     var fullName: String {
         let first = String.emptyForNilOptional(firstName)
@@ -90,8 +88,8 @@ extension Contact: JSONDecodable {
     }
 
     var address: String {
-        if let firstLocation = location?.first,
-            let location = firstLocation,
+        let firstLocation = location?.first
+        if let location = firstLocation,
             let data = location.data {
             let city = String.emptyForNilOptional(data.city)
             let state = String.emptyForNilOptional(data.state)
@@ -101,15 +99,14 @@ extension Contact: JSONDecodable {
         }
     }
     
-    static func decode(_ json: JSON) -> Contact? {
-        return Contact(
-            avatar: json <| "avatar",
-            firstName: json <| "firstName",
-            lastName: json <| "lastName",
-            company: json <| "company",
-            phone: json <|| "phone" >>> Phone.decode,
-            email: json <|| "email" >>> Email.decode,
-            location: json <|| "location" >>> Location.decode)
+    init(object: MarshaledObject) {
+        avatar = try? object.value(for: "avatar")
+        firstName = try? object.value(for: "firstName")
+        lastName = try? object.value(for: "lastName")
+        company = try? object.value(for: "company")
+        phone = try? object.value(for: "phone")
+        email = try? object.value(for: "email")
+        location = try? object.value(for: "location")
     }
     
 }

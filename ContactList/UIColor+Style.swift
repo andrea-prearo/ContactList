@@ -13,14 +13,14 @@ extension UIColor {
 
     static func defaultGradientBackgroundColor() -> UIColor {
         let colors:[UIColor] = [
-            UIColor.flatBlueColorDark(),
-            UIColor.flatWhiteColor()
+            UIColor.flatBlueDark,
+            UIColor.flatWhite
         ]
-        return GradientColor(.TopToBottom, frame: UIScreen.mainScreen().bounds, colors: colors)
+        return GradientColor(.topToBottom, frame: UIScreen.main.bounds, colors: colors)
     }
 
     static func defaultBackgroundColor() -> UIColor {
-        return UIColor.flatPowderBlueColorDark()
+        return UIColor.flatPowderBlueDark
     }
 
 }

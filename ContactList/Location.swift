@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import LiteJSONConvertible
+import Marshal
 
 struct Location {
     
@@ -22,12 +22,11 @@ struct Location {
     
 }
 
-extension Location: JSONDecodable {
+extension Location: Unmarshaling {
     
-    static func decode(_ json: JSON) -> Location? {
-        return Location(
-            label: json <| "label",
-            data: json <| "data" >>> LocationData.decode)
+    init(object: MarshaledObject) {
+        label = try? object.value(for: "label")
+        data = try? object.value(for: "data")
     }
     
 }

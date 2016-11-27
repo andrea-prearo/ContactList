@@ -1,30 +1,39 @@
 PODS:
-  - Alamofire (3.4.2)
-  - AlamofireImage (2.4.1):
-    - Alamofire (~> 3.3)
+  - Alamofire (4.2.0)
+  - AlamofireImage (3.2.0):
+    - Alamofire (~> 4.1)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
-  - LiteJSONConvertible (0.0.4)
-  - Locksmith (2.0.8)
-  - SVProgressHUD (2.0.3)
+  - Locksmith (3.0.0)
+  - Marshal (1.0.0)
+  - SVProgressHUD (2.0.4)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.4.2)
-  - AlamofireImage (~> 2.4.1)
-  - ChameleonFramework/Swift (~> 2.1.0)
-  - LiteJSONConvertible (~> 0.0.4)
-  - Locksmith (~> 2.0.8)
-  - SVProgressHUD (~> 2.0.3)
+  - Alamofire (~> 4.2.0)
+  - AlamofireImage (~> 3.2.0)
+  - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
+  - Locksmith (~> 3.0.0)
+  - Marshal (~> 1.0.0)
+  - SVProgressHUD (~> 2.0.4)
+
+EXTERNAL SOURCES:
+  ChameleonFramework:
+    :git: https://github.com/ViccAlexander/Chameleon.git
+
+CHECKOUT OPTIONS:
+  ChameleonFramework:
+    :commit: dcf98f9bf3a632a7f40679b7da46f09681e48526
+    :git: https://github.com/ViccAlexander/Chameleon.git
 
 SPEC CHECKSUMS:
-  Alamofire: 6aa33201d20d069e1598891cf928883ff1888c7a
-  AlamofireImage: 3ccf3347d9ea24580dc11fb892770a0be6a29826
+  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
-  LiteJSONConvertible: 61a6510fae357fce28a51466cdb86c0348d6ea60
-  Locksmith: a8ed41ac4c06506ea8cb199d8ec8a8d3d108eb2a
-  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
+  Locksmith: 310b4cc5031af5728bf4db5d4de547a5100c6a3b
+  Marshal: a3c5c5dbd388112edf3cdabb718f2b4cfe48658a
+  SVProgressHUD: bfde85ed6c573ea802b9cb37894ed9b629034f1b
 
-PODFILE CHECKSUM: 28f591adab4a7c3736219856f323814d8946f9f7
+PODFILE CHECKSUM: 9add24a5785efec4d5246b9e95d52c7e46683e9f
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.1.0.rc.2

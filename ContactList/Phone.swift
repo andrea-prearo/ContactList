@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import LiteJSONConvertible
+import Marshal
 
 struct Phone {
     
@@ -22,12 +22,11 @@ struct Phone {
     
 }
 
-extension Phone: JSONDecodable {
+extension Phone: Unmarshaling {
     
-    static func decode(_ json: JSON) -> Phone? {
-        return Phone(
-            label: json <| "label",
-            number: json <| "number")
+    init(object: MarshaledObject) {
+        label = try? object.value(for: "label")
+        number = try? object.value(for: "number")
     }
     
 }

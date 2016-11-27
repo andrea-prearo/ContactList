@@ -4,10 +4,10 @@ platform :ios, '8.0'
 use_frameworks!
  
 target 'ContactList' do
-  pod 'Alamofire', '~> 3.4.2'
-  pod 'AlamofireImage', '~> 2.4.1'
-  pod 'Locksmith', '~> 2.0.8'
-  pod 'ChameleonFramework/Swift', '~> 2.1.0'
-  pod 'SVProgressHUD', '~> 2.0.3'
-  pod 'LiteJSONConvertible', '~> 0.0.4'
+  pod 'Alamofire', '~> 4.2.0'
+  pod 'AlamofireImage', '~> 3.2.0'
+  pod 'Locksmith', '~> 3.0.0'
+  pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
+  pod 'SVProgressHUD', '~> 2.0.4'
+  pod 'Marshal', '~> 1.0.0'
 end

@@ -11,7 +11,7 @@ import Alamofire
 import Locksmith
 import SVProgressHUD
 
-typealias CompletionBlock = ((Response<AnyObject, NSError>) -> ())
+typealias CompletionBlock = ((DataResponse<AnyObject>) -> ())
 
 enum LoginViewControllerSegmentIndex: Int {
     case logIn = 0
@@ -62,13 +62,13 @@ private extension LoginViewController {
         submitButton.layer.cornerRadius = CGFloat(2.5)
         submitButton.clipsToBounds = true
         submitButton.setBackgroundImage(UIImage.imageWithColor(UIColor.clear), for: UIControlState())
-        let selectedImage = UIImage.imageWithColor(UIColor.flatWhiteColor())
-        submitButton.setBackgroundImage(selectedImage, forState: .Highlighted)
-        submitButton.setBackgroundImage(selectedImage, forState: .Selected)
-        let titleColor = UIColor.flatBlackColorDark()
-        submitButton.setTitleColor(UIColor.flatGrayColorDark(), for: .Normal)
-        submitButton.setTitleColor(titleColor, forState: .Highlighted)
-        submitButton.setTitleColor(titleColor, forState: .Selected)
+        let selectedImage = UIImage.imageWithColor(UIColor.flatWhite)
+        submitButton.setBackgroundImage(selectedImage, for: .highlighted)
+        submitButton.setBackgroundImage(selectedImage, for: .selected)
+        let titleColor = UIColor.flatBlackDark
+        submitButton.setTitleColor(UIColor.flatGrayDark, for: .normal)
+        submitButton.setTitleColor(titleColor, for: .highlighted)
+        submitButton.setTitleColor(titleColor, for: .selected)
     }
 
     @IBAction func submitButtonTapped(_ sender: AnyObject) {
@@ -90,8 +90,8 @@ private extension LoginViewController {
                     }
                     let _ = try? account.deleteFromSecureStore()
                     let _ = try? account.createInSecureStore()
-                    let _ = try? Locksmith.deleteDataForUserAccount(AuthorizedUser.StoreKey)
-                    let _ = try? Locksmith.saveData(account.data, forUserAccount: AuthorizedUser.StoreKey)
+                    let _ = try? Locksmith.deleteDataForUserAccount(userAccount: AuthorizedUser.StoreKey)
+                    let _ = try? Locksmith.saveData(data: account.data, forUserAccount: AuthorizedUser.StoreKey)
                     strongSelf.performSegue(withIdentifier: SegueIdentifiers.AuthToContactsSegue.rawValue, sender: self)
                 } else {
                     DispatchQueue.main.async {

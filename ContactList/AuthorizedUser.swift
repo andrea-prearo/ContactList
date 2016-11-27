@@ -26,7 +26,7 @@ class AuthorizedUser: ReadableSecureStorable, CreateableSecureStorable, Deleteab
 
     // MARK: CreateableSecureStorable protocol methods
 
-    var data: [String: AnyObject] {
+    var data: [String: Any] {
         let email: String
         if let unwrapped = self.email {
             email = unwrapped
@@ -70,13 +70,13 @@ extension AuthorizedUser {
         return AuthorizedUser(email: email, password: password, token: token)
     }
 
-    static func loadFromStore() -> Result<AuthorizedUser, NSError>  {
-        if let accountData = Locksmith.loadDataForUserAccount(AuthorizedUser.StoreKey),
-            let account = AuthorizedUser.decode(accountData) {
-            return .Success(account)
+    static func loadFromStore() -> Result<AuthorizedUser>  {
+        if let accountData = Locksmith.loadDataForUserAccount(userAccount: AuthorizedUser.StoreKey),
+            let account = AuthorizedUser.decode(accountData as [String : AnyObject]) {
+            return .success(account)
         }
 
-        return .Failure(ErrorCodes.InvalidAuthorizedUser())
+        return .failure(ErrorCodes.InvalidAuthorizedUser())
     }
         
 }
