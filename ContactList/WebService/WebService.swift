@@ -10,7 +10,6 @@ import Foundation
 import Alamofire
 
 class WebServiceConstants {
-
     private static var __once: () = { () -> Void in
         if let plistpath = Bundle.main.path(forResource: "APIEnvironments", ofType: "plist"),
             let plist = NSDictionary(contentsOfFile: plistpath) {
@@ -48,11 +47,9 @@ class WebServiceConstants {
     
     // Contacts
     class var Contacts: String { return HostAddress + "/api/contacts" }
-
 }
 
 class WebService {
-    
     // Use custom error message instead of the default one provided by Alamofire's validate()
     static func verifyAuthenticationErrors(_ response: AuthResponse) -> Error? {
         if let urlResponse = response.response,
@@ -95,6 +92,5 @@ class WebService {
 
             completionBlock(true, nil)
         }
-    }
-    
+    }    
 }

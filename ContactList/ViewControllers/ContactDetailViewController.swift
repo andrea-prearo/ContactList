@@ -10,7 +10,6 @@ import UIKit
 import AlamofireImage
 
 class ContactDetailViewController: UIViewController {
-
     @IBOutlet weak var scrollView: UIScrollView!
 
     var contact: Contact?
@@ -44,13 +43,11 @@ class ContactDetailViewController: UIViewController {
         automaticallyAdjustsScrollViewInsets = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
     }
-
 }
 
 // MARK: Private Methods
 
 private extension ContactDetailViewController {
-
     func configure() {
         guard let contact = contact
         else {
@@ -69,5 +66,4 @@ private extension ContactDetailViewController {
         company.text = viewModel.company
         address.text = viewModel.address
     }
-    
 }

@@ -11,7 +11,6 @@ import UIKit
 let ContactCellId = "ContactCell"
 
 class ContactsTableViewController: UITableViewController {
-    
     static let scopeButtonTitleDefault = NSLocalizedString("Default", comment: "Default")
     static let scopeButtonTitleFirstName = NSLocalizedString("First Name", comment: "First Name")
     static let scopeButtonTitleLastName = NSLocalizedString("Last Name", comment: "Last Name")
@@ -27,7 +26,7 @@ class ContactsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUpStyle()
+//        setUpStyle()
         setupSearchBar()
 
         Contact.getAll { [weak self] (success, contacts, error) -> () in
@@ -50,13 +49,11 @@ class ContactsTableViewController: UITableViewController {
             }
         }
     }
-
 }
 
 // MARK: Private Methods and Computed Properties
 
 private extension ContactsTableViewController {
-
     func setUpStyle() {
         tableView.backgroundColor = UIColor.defaultBackgroundColor()
     }
@@ -159,13 +156,11 @@ private extension ContactsTableViewController {
             return searchController.isActive && searchController.searchBar.text?.isEmpty == false
         }
     }
-
 }
 
 // MARK: UITableViewDataSource protocol methods
 
 extension ContactsTableViewController {
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isSearchBarActive {
             if let filteredContacts = filteredContacts {
@@ -195,14 +190,12 @@ extension ContactsTableViewController {
         }
         return cell
     }
-
 }
 
 
 // MARK: UITableViewDelegate protocol methods
 
 extension ContactsTableViewController {
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
         performSegue(withIdentifier: SegueIdentifiers.ContactsToContactDetailSegue.rawValue, sender: self)
@@ -219,13 +212,11 @@ extension ContactsTableViewController {
             showDeleteContactAlert(contact)
         }
     }
-
 }
 
 // MARK: Segues
 
 extension ContactsTableViewController {
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueIdentifiers.ContactsToContactDetailSegue.rawValue {
             guard let destinationViewController = segue.destination as? ContactDetailViewController else { return }
@@ -247,27 +238,22 @@ extension ContactsTableViewController {
             navigationItem.backBarButtonItem = backItem
         }
     }
-
 }
 
 // MARK: UISearchBarDelegate Delegate
 
 extension ContactsTableViewController: UISearchBarDelegate {
-
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContacts(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
-
 }
 
 // MARK: UISearchResultsUpdating Delegate
 
 extension ContactsTableViewController: UISearchResultsUpdating {
-
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
         filterContacts(searchController.searchBar.text!, scope: scope)
     }
-
 }

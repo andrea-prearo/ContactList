@@ -19,7 +19,6 @@ enum LoginViewControllerSegmentIndex: Int {
 }
 
 class LoginViewController: UIViewController {
-    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
@@ -48,15 +47,13 @@ class LoginViewController: UIViewController {
             }
         }
     }
-
 }
 
 // MARK: Private Methods
 
 private extension LoginViewController {
-
     func setUpStyle() {
-        view.backgroundColor = UIColor.defaultGradientBackgroundColor()
+//        view.backgroundColor = UIColor.defaultGradientBackgroundColor()
         navigationController?.defaultNavigationBarStyle()
 
         submitButton.layer.cornerRadius = CGFloat(2.5)
@@ -118,5 +115,4 @@ private extension LoginViewController {
             self.present(alertController, animated: true, completion: nil)
         }
     }
-
 }

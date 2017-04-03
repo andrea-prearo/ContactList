@@ -9,7 +9,6 @@
 import Foundation
 
 class ContactDetailViewModel {
-    
     let avatarUrl: String?
     let username: String
     let company: String
@@ -32,5 +31,4 @@ class ContactDetailViewModel {
         // Address
         address = contact.address
     }
-    
 }

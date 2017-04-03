@@ -10,7 +10,6 @@ import UIKit
 import AlamofireImage
 
 class ContactCell: UITableViewCell {
-
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var company: UILabel!
@@ -25,5 +24,4 @@ class ContactCell: UITableViewCell {
         username.text = viewModel.username
         company.text = viewModel.company
     }
-
 }

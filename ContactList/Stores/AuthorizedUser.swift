@@ -11,7 +11,6 @@ import Locksmith
 import Alamofire
 
 class AuthorizedUser: ReadableSecureStorable, CreateableSecureStorable, DeleteableSecureStorable, GenericPasswordSecureStorable {
-
     class var StoreKey: String { return "AuthorizedUserKey" }
 
     let email: String?
@@ -58,11 +57,9 @@ class AuthorizedUser: ReadableSecureStorable, CreateableSecureStorable, Deleteab
             return ""
         }
     }
-    
 }
 
 extension AuthorizedUser {
-    
     static func decode(_ json: [String: AnyObject]) -> AuthorizedUser? {
         let email = json["email"] as? String
         let password = json["password"] as? String
@@ -77,6 +74,5 @@ extension AuthorizedUser {
         }
 
         return .failure(ErrorCodes.InvalidAuthorizedUser())
-    }
-        
+    }        
 }

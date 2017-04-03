@@ -13,7 +13,6 @@ typealias WebServiceAuthCompletionBlock = ((_ success: Bool, _ token: String?, _
 typealias AuthResponse = DataResponse<Any>
 
 class Auth {
-
     static func login(email: String, password: String, completionBlock: @escaping WebServiceAuthCompletionBlock) {
         authorize(email: email, password: password, path: WebServiceConstants.LogIn, completionBlock: completionBlock)
     }
@@ -21,11 +20,9 @@ class Auth {
     static func register(email: String, password: String, completionBlock: @escaping WebServiceAuthCompletionBlock) {
         authorize(email: email, password: password, path: WebServiceConstants.SignUp, completionBlock: completionBlock)
     }
-
 }
 
 private extension Auth {
-
     static func authorize(email: String,
         password: String,
         path: String,
@@ -67,6 +64,5 @@ private extension Auth {
                 
                 completionBlock(true, token, nil)
         }
-    }
-    
+    }    
 }
